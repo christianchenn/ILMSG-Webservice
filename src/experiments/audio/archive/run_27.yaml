@@ -1,0 +1,25 @@
+checkpoint_path: 26-Holly_LightGray-2023-03-15_00.00.44/ilmsg-audioae=epoch=303-step=63840-val_loss=0.2501.ckpt
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 500
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames, From checkpoint 26-Holly_LightGray-2023-03-15_00.00.44/ilmsg-audioae=epoch=303-step=63840-val_loss=0.2501.ckpt
+hyperparameters:
+  batch_size: 768
+  epochs: 1000
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57123
+id: 27-Kristen_LightSlateGray-6n2mhhpa
+model: AudioAEV9
+name: 27-Kristen_LightSlateGray-2023-03-15_14.29.56
+run: 27

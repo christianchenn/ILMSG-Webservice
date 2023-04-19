@@ -11,7 +11,13 @@ def create_app(config_class=Config):
 
     # Register blueprints here
     from app.main import bp as main_bp
+    from app.models import bp as models_bp
     app.register_blueprint(main_bp, url_prefix='/main')
+    app.register_blueprint(models_bp, url_prefix='/models')
+
+    # app/__init__.py
+    from app.database import init_db
+    init_db(app)
 
     @app.route('/test/')
     def test_page():

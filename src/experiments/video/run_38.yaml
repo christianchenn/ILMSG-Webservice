@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  color: true
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 48
+  epochs: 100
+  learning_rate: 0.0001
+  seed: 8
+id: 38-Norma_Yellow-crradvxp
+model:
+  checkpoint_path: null
+  name: 38-Norma_Yellow-2023-04-13_08.44.16
+  train: true
+  version: 38
+name: null
+run: 38

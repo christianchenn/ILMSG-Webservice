@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-40
+  type: audiov2
+hyperparameters:
+  batch_size: 1024
+  epochs: 10000
+  learning_rate: 0.001
+  seed: 777
+id: 1-Victoria_DeepPink-1jjbujpr
+model:
+  checkpoint_path: null
+  name: 1-Victoria_DeepPink-2023-04-01_18.16.56
+  train: true
+  version: 1
+run: 1

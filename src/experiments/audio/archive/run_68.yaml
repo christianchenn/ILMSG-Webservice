@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-40
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 5000
+  learning_rate: 0.001
+  seed: 888
+id: 68-Jennifer_BurlyWood-rv1w1jzu
+model:
+  checkpoint_path: null
+  name: 68-Jennifer_BurlyWood-2023-04-04_17.32.44
+  train: true
+  version: 30
+run: 68

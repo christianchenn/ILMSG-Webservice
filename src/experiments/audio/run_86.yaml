@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 750
+  learning_rate: 0.001
+  seed: 8
+id: 86-Nicole_SaddleBrown-2mxhmwe7
+model:
+  checkpoint_path: null
+  name: 86-Nicole_SaddleBrown-2023-04-15_09.43.09
+  train: true
+  version: 46
+run: 86

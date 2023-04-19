@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-150
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 10000
+  learning_rate: 1.0e-05
+  seed: 888
+id: 55-Julie_AliceBlue-kjolfg0t
+model:
+  checkpoint_path: null
+  name: 55-Julie_AliceBlue-2023-04-02_19.20.55
+  train: true
+  version: 21
+run: 55

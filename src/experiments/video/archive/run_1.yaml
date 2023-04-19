@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 8
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 43-Amy_PeachPuff-2023-03-23_16.20.35
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 52
+  epochs: 10
+  learning_rate: 0.0001
+  seed: 42069
+id: 1-Allison_GreenYellow-pqqb6enr
+model:
+  checkpoint_path: null
+  name: 1-Allison_GreenYellow-2023-03-24_05.28.23
+  train: true
+  version: 2
+name: null
+run: 1

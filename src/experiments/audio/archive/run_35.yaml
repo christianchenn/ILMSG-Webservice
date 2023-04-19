@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 800
+  epochs: 3000
+  frames: 25
+  learning_rate: 0.005
+  n_mels: 128
+  seed: 57
+id: 35-Michelle_SlateBlue-4ad73qql
+model: AudioAEV10
+name: 35-Michelle_SlateBlue-2023-03-20_15.51.32
+run: 35

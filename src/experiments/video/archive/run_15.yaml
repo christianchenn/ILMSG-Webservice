@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 49-Jessica_Linen-2023-03-29_12.07.28
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 40
+  epochs: 275
+  learning_rate: 0.0001
+  seed: 888
+id: 15-Melissa_Purple-yp08z1qd
+model:
+  checkpoint_path: null
+  name: 15-Melissa_Purple-2023-03-30_18.14.01
+  train: true
+  version: 14
+name: null
+run: 15

@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 50
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 384
+  epochs: 200
+  frames: 26
+  learning_rate: 8.0e-05
+  n_mels: 128
+  seed: 420
+id: 16-Yvonne_Yellow-xhhbv37p
+model: AudioAEV5
+name: 16-Yvonne_Yellow-2023-03-10_20.55.46
+run: 16

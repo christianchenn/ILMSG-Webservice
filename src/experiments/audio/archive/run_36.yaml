@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+data:
+  size: 150
+  type: audio
+  frames: 25
+  n_mels: 128
+  gender: pria
+hyperparameters:
+  batch_size: 700
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 57
+id: 36-Molly_LightSlateGray-8buz9m2t
+model: 
+  version: 11
+  checkpoint_path: null
+  train: true
+  name: 36-Molly_LightSlateGray-2023-03-20_17.08.51
+run: 36

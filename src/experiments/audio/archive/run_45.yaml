@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  type: audio
+hyperparameters:
+  batch_size: 1152
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 42069
+id: 45-Kimberly_LightGoldenRodYellow-aghcbs8o
+model:
+  checkpoint_path: null
+  name: 45-Kimberly_LightGoldenRodYellow-2023-03-28_22.51.26
+  train: true
+  version: 14
+run: 45

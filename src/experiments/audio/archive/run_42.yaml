@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  type: audio
+hyperparameters:
+  batch_size: 768
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 42069
+id: 42-Megan_SaddleBrown-96z5ezzk
+model:
+  checkpoint_path: null
+  name: 42-Megan_SaddleBrown-2023-03-23_11.30.12
+  train: true
+  version: 9
+run: 42

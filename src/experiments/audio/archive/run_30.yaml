@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 768
+  epochs: 3000
+  frames: 25
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 29-Melanie_SkyBlue-phqdmxtc
+model: AudioAEV9
+name: 29-Melanie_SkyBlue-2023-03-17_16.52.28
+run: 29

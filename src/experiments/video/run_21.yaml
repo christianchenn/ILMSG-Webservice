@@ -1,0 +1,31 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: true
+data:
+  audio_run: 76-Sheri_Gray-2023-04-08_23.21.13
+  audio_to_db: true
+  audio_version: 37
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 6
+  type: video
+hyperparameters:
+  batch_size: 8
+  epochs: 250
+  learning_rate: 0.001
+  seed: 8
+id: 21-Jennifer_Aqua-m1tky7a4
+model:
+  checkpoint_path: null
+  name: 21-Jennifer_Aqua-2023-04-09_02.00.58
+  train: true
+  version: 22
+name: null
+run: 21

@@ -1,0 +1,31 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 14
+  epochs: 150
+  learning_rate: 0.001
+  seed: 8
+id: 24-Frances_DarkSlateGray-j40fhd44
+model:
+  checkpoint_path: null
+  name: 24-Frances_DarkSlateGray-2023-04-09_21.40.50
+  train: true
+  version: 24
+name: null
+run: 24

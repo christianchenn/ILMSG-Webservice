@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 500
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 768
+  epochs: 500
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57123
+id: 26-Holly_LightGray-qc3ofqtg
+model: AudioAEV9
+name: 26-Holly_LightGray-2023-03-15_00.00.44
+run: 26

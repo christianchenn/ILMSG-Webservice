@@ -1,0 +1,25 @@
+checkpoint_path: 27-Kristen_LightSlateGray-2023-03-15_14.29.56/ilmsg-audioae=epoch=759-step=159600-val_loss=0.0699.ckpt
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 500
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames, From checkpoint 27-Kristen_LightSlateGray-2023-03-15_14.29.56/ilmsg-audioae=epoch=759-step=159600-val_loss=0.0699.ckpt
+hyperparameters:
+  batch_size: 768
+  epochs: 250
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57123
+id: 28-Erica_Olive-hk5npq4z
+model: AudioAEV9
+name: 28-Erica_Olive-2023-03-16_14.59.02
+run: 28

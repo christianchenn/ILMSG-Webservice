@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-150
+  type: audio
+hyperparameters:
+  batch_size: 576
+  epochs: 5000
+  learning_rate: 0.0001
+  seed: 888
+id: 54-Katelyn_DimGray-1l71rp4p
+model:
+  checkpoint_path: null
+  name: 54-Katelyn_DimGray-2023-04-01_15.51.49
+  train: true
+  version: 21
+run: 54

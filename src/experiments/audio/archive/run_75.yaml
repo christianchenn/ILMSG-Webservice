@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 5000
+  learning_rate: 0.0001
+  seed: 555
+id: 75-Sheila_Chartreuse-ha6hie6r
+model:
+  checkpoint_path: null
+  name: 75-Sheila_Chartreuse-2023-04-08_11.52.49
+  train: true
+  version: 37
+run: 75

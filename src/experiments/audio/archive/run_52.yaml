@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-150
+  type: audio
+hyperparameters:
+  batch_size: 768
+  epochs: 5000
+  learning_rate: 0.0001
+  seed: 888
+id: 52-Kelly_Aquamarine-j9cnt5gn
+model:
+  checkpoint_path: null
+  name: 52-Kelly_Aquamarine-2023-03-31_22.01.02
+  train: true
+  version: 19
+run: 52

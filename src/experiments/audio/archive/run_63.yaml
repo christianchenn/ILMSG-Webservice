@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-40
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 20000
+  learning_rate: 0.0001
+  seed: 888
+id: 63-Kristin_DarkBlue-pm9mkxtr
+model:
+  checkpoint_path: 62-Brittany_FloralWhite-2023-04-04_09.36.05/best
+  name: 63-Kristin_DarkBlue-2023-04-04_11.51.25
+  train: true
+  version: 9
+run: 63

@@ -3,4 +3,4 @@ from config import Config
 
 
 app = create_app(Config())
-# flask --app main.py --debug run
+# flask --app app.py --debug run

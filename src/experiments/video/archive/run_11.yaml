@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 49-Jessica_Linen-2023-03-29_12.07.28
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 5
+  epochs: 10
+  learning_rate: 0.001
+  seed: 888
+id: 11-Sara_Lavender-wkplw9s5
+model:
+  checkpoint_path: ilmsg-visual=epoch=2-step=3654-val_loss=3.0535.ckpt
+  name: 11-Sara_Lavender-2023-03-30_04.55.12
+  train: false
+  version: 11
+name: null
+run: 11

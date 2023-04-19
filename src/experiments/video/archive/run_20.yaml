@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 4
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 69-Caitlin_DarkRed-2023-04-05_11.57.39
+  audio_version: 31
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-40
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 100
+  learning_rate: 0.001
+  seed: 888
+id: 20-Kristi_DarkGray-kafids2t
+model:
+  checkpoint_path: null
+  name: 20-Kristi_DarkGray-2023-04-05_12.39.18
+  train: true
+  version: 20
+name: null
+run: 20

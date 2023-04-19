@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: true
+data:
+  frames: 5
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-40
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 5000
+  learning_rate: 0.001
+  seed: 888
+id: null
+model:
+  checkpoint_path: null
+  name: null
+  train: true
+  version: 34
+run: 72

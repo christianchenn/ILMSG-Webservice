@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: false
+  type: audio
+data:
+  size: 20
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 128
+  epochs: 1000
+  frames: 26
+  learning_rate: 0.0005
+  n_mels: 128
+  seed: 57
+id: 20-Kiara_DarkSeaGreen-k24sw4tw
+model: AudioAEV8
+name: 20-Kiara_DarkSeaGreen-2023-03-11_10.55.56
+run: 20

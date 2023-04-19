@@ -1,0 +1,31 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 82-Jennifer_SpringGreen-2023-04-10_11.06.58
+  audio_to_db: true
+  audio_version: 43
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video2mel
+hyperparameters:
+  batch_size: 5
+  epochs: 10
+  learning_rate: 0.001
+  seed: 8
+id: null
+model:
+  checkpoint_path: null
+  name: null
+  train: true
+  version: 28
+name: null
+run: 999

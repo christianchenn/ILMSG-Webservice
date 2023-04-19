@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 50
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 256
+  epochs: 1500
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 8-Cindy_DarkSlateBlue-mxb43dss
+model: AudioAEV3
+name: 8-Cindy_DarkSlateBlue-2023-03-10_01.13.21
+run: 8

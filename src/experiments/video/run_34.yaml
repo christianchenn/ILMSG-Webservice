@@ -1,0 +1,31 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 6
+  type: video
+hyperparameters:
+  batch_size: 8
+  epochs: 150
+  learning_rate: 0.001
+  seed: 8
+id: 34-Cassidy_MediumTurquoise-q4962m5b
+model:
+  checkpoint_path: null
+  name: 34-Cassidy_MediumTurquoise-2023-04-12_12.58.52
+  train: true
+  version: 35
+name: null
+run: 34

@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 888
+id: 49-Jessica_Linen-8s1jtesx
+model:
+  checkpoint_path: null
+  name: 49-Jessica_Linen-2023-03-29_12.07.28
+  train: true
+  version: 9
+run: 49
+

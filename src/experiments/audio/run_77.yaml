@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audio
+hyperparameters:
+  batch_size: 384
+  epochs: 5000
+  learning_rate: 0.0001
+  seed: 8
+id: 77-Erika_MediumBlue-x8of4nji
+model:
+  checkpoint_path: null
+  name: 77-Erika_MediumBlue-2023-04-09_11.08.48
+  train: true
+  version: 38
+run: 77

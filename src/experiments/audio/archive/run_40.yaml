@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  type: audio
+hyperparameters:
+  batch_size: 725
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 42069
+id: 40-Jessica_SkyBlue-trcw2kay
+model:
+  checkpoint_path: null
+  name: 40-Jessica_SkyBlue-2023-03-23_00.07.18
+  train: true
+  version: 13
+run: 40

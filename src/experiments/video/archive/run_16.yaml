@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 4
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 54-Katelyn_DimGray-2023-04-01_15.51.49
+  audio_version: 21
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 2
+  epochs: 100
+  learning_rate: 0.001
+  seed: 888
+id: 16-Katherine_DarkBlue-uy9ode5h
+model:
+  checkpoint_path: null
+  name: 16-Katherine_DarkBlue-2023-04-02_11.40.07
+  train: true
+  version: 16
+name: null
+run: 16

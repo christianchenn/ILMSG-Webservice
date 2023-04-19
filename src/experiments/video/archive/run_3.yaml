@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 8
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 43-Amy_PeachPuff-2023-03-23_16.20.35
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 16
+  epochs: 20
+  learning_rate: 0.0001
+  seed: 42069
+id: 
+model:
+  checkpoint_path: 2-Karen_DarkSeaGreen-2023-03-25_10.59.49/best
+  name: 
+  train: true
+  version: 3
+name: null
+run: 3

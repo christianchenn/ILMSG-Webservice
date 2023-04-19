@@ -1,0 +1,25 @@
+checkpoint_path: 24-Michelle_MediumSlateBlue-2023-03-12_13.57.16/ilmsg-audioae=epoch=15-step=7184-val_loss=0.1141.ckpt
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: full
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames, From checkpoint ckpt_filename
+hyperparameters:
+  batch_size: 768
+  epochs: 750
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 25-Kathryn_PaleGoldenRod-zie30zyk
+model: AudioAEV9
+name: 25-Kathryn_PaleGoldenRod-2023-03-13_17.14.20
+run: 25

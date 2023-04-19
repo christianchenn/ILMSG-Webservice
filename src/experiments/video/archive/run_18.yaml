@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 4
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 67-Ana_Yellow-2023-04-04_15.03.07
+  audio_version: 29
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-40
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 11
+  epochs: 100
+  learning_rate: 0.0001
+  seed: 888
+id: 18-Angela_OrangeRed-hngm70zu
+model:
+  checkpoint_path: null
+  name: 18-Angela_OrangeRed-2023-04-04_16.21.57
+  train: true
+  version: 18
+name: null
+run: 18

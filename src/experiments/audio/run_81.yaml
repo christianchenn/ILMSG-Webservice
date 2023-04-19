@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: true
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 500
+  learning_rate: 0.001
+  seed: 8
+id: 81-Paula_LightSkyBlue-9dykj1ce
+model:
+  checkpoint_path: null
+  name: 81-Paula_LightSkyBlue-2023-04-10_11.03.17
+  train: true
+  version: 42
+run: 81

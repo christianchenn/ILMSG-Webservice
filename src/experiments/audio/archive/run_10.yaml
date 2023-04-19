@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 256
+  epochs: 100
+  frames: 26
+  learning_rate: 1.0e-05
+  n_mels: 128
+  seed: 57
+id: 10-Kimberly_CadetBlue-o4dulzkg
+model: AudioAEV3
+name: 10-Kimberly_CadetBlue-2023-03-10_12.00.16
+run: 10

@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 50
+  learning_rate: 0.001
+  seed: 8
+id: 41-Amanda_LightSkyBlue-1s644mgp
+model:
+  checkpoint_path: null
+  name: 41-Amanda_LightSkyBlue-2023-04-13_17.22.01
+  train: true
+  version: 40
+name: null
+run: 41

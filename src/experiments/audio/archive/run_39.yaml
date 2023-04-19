@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: full
+  type: audio
+hyperparameters:
+  batch_size: 725
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 420
+id: 39-Darlene_Gainsboro-grl2wnsu
+model:
+  checkpoint_path: null
+  name: 39-Darlene_Gainsboro-2023-03-22_10.34.56
+  train: true
+  version: 12
+run: 39

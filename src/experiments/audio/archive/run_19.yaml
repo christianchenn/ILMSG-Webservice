@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 3
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 30 Frames
+hyperparameters:
+  batch_size: 128
+  epochs: 1000
+  frames: 31
+  learning_rate: 0.001
+  n_mels: 128
+  seed: 57123
+id: 19-Danielle_Lime-lxbb9qpg
+model: AudioAEV8
+name: 19-Danielle_Lime-2023-03-11_10.10.52
+run: 19

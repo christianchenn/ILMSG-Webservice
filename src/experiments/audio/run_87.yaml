@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  normalize: false
+  size: Salsa Dewi Anjani-full
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 750
+  learning_rate: 0.001
+  seed: 8
+id: 87-Wendy_Khaki-3i0pmw5q
+model:
+  checkpoint_path: null
+  name: 87-Wendy_Khaki-2023-04-16_17.42.41
+  train: true
+  version: 40
+run: 87

@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 1024
+  epochs: 325
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 4-Debra_GhostWhite-ag9k6jpw
+model: AudioAEV1
+name: 4-Debra_GhostWhite-2023-03-06_23:48:53
+run: 4

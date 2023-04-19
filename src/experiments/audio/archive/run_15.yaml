@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 50
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 384
+  epochs: 250
+  frames: 26
+  learning_rate: 8.0e-05
+  n_mels: 128
+  seed: 420
+id: 15-Laura_White-opcx62lt
+model: AudioAEV4
+name: 15-Laura_White-2023-03-10_17.13.34
+run: 15

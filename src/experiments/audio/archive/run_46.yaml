@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  type: audio
+hyperparameters:
+  batch_size: 1152
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 42069
+id: 46-Kristin_MistyRose-p3m362u6
+model:
+  checkpoint_path: null
+  name: 46-Kristin_MistyRose-2023-03-29_09.44.12
+  train: false
+  version: 15
+run: 46

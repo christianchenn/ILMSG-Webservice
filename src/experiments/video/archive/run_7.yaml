@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 8
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 44-Katherine_Tan-2023-03-25_00.15.54
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: overfit
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 8
+  epochs: 20
+  learning_rate: 0.001
+  seed: 42069
+id: 7-Erin_Teal-oclhhq1w
+model:
+  checkpoint_path: 6-Rachel_Azure-2023-03-27_05.18.31/best
+  name: 7-Erin_Teal-2023-03-27_08.30.49
+  train: true
+  version: 6
+name: null
+run: 7

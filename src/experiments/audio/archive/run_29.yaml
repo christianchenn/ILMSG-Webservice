@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: false
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 15 Frames
+hyperparameters:
+  batch_size: 1024
+  epochs: 3000
+  frames: 16
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57
+id: 29-Cynthia_MediumPurple-1ayccukc
+model: AudioAEV9
+name: 29-Cynthia_MediumPurple-2023-03-17_01.16.13
+run: 29

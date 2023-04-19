@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 48
+  epochs: 1
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: ub4tn7aw
+model: AudioAEV2
+name: 1-dauntless-sound
+run: 1

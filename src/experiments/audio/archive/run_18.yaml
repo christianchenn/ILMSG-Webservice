@@ -1,0 +1,25 @@
+# Mencoba AudioAE7, LeakyRELU dan Dropout sedikit
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: false
+  type: audio
+data:
+  size: 500
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 30 Frames
+hyperparameters:
+  batch_size: 512
+  epochs: 100
+  frames: 31
+  learning_rate: 0.001
+  n_mels: 128
+  seed: 57123
+id: 18-Mary_GreenYellow-ul5ni67e
+model: AudioAEV7
+name: 18-Mary_GreenYellow-2023-03-11_01.41.14
+run: 18

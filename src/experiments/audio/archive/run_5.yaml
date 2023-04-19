@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 4
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 6144
+  epochs: 2000
+  frames: 26
+  learning_rate: 0.0002
+  n_mels: 128
+  seed: 420
+id: 
+model: AudioAEV1
+name: 
+run: 5

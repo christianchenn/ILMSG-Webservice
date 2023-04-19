@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 30
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 256
+  epochs: 100
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57
+id: 13-Kendra_DarkViolet-d1w41jef
+model: AudioAEV4
+name: 13-Kendra_DarkViolet-2023-03-10_14.57.55
+run: 13

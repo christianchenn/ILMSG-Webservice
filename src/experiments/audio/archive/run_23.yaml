@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 768
+  epochs: 2500
+  frames: 26
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 57
+id: 23-Katrina_PeachPuff-7cev893f
+model: AudioAEV9
+name: 23-Katrina_PeachPuff-2023-03-11_22.16.12
+run: 23

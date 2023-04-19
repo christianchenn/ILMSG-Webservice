@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 20
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 256
+  epochs: 100
+  frames: 26
+  learning_rate: 0.001
+  n_mels: 128
+  seed: 57
+id: 11-Ellen_DarkBlue-bq1joiif
+model: AudioAEV3
+name: 11-Ellen_DarkBlue-2023-03-10_14.27.28
+run: 11

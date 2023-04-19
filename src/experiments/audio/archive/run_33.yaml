@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: full
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 800
+  epochs: 3000
+  frames: 25
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 33-Dawn_GhostWhite-w7j99lxi
+model: AudioAEV9
+name: 33-Dawn_GhostWhite-2023-03-19_01.14.07
+run: 33

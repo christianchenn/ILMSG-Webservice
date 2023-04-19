@@ -1,0 +1,26 @@
+# checkpoint_path: 29-Melanie_SkyBlue-2023-03-17_16.52.28/ilmsg-audioae=epoch=36-step=2405-val_loss=4.4360.ckpt
+checkpoint_path: best
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: false
+  type: audio
+data:
+  size: 150
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames, From checkpoint 29-Melanie_SkyBlue-2023-03-17_16.52.28/ilmsg-audioae=epoch=36-step=2405-val_loss=4.4360.ckpt
+hyperparameters:
+  batch_size: 768
+  epochs: 3000
+  frames: 25
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 31-Kelly_SeaShell-nvne25d3
+model: AudioAEV9
+name: 31-Kelly_SeaShell-2023-03-17_17.28.12
+run: 31

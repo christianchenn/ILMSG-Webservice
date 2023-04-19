@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 49-Jessica_Linen-2023-03-29_12.07.28
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 5
+  epochs: 25
+  learning_rate: 0.0001
+  seed: 888
+id: 12-Linda_Olive-z8zdgvwe
+model:
+  checkpoint_path: null
+  name: 12-Linda_Olive-2023-03-30_06.55.24
+  train: false
+  version: 11
+name: null
+run: 12

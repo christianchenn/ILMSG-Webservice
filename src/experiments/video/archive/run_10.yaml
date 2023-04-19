@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 4
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 43-Amy_PeachPuff-2023-03-23_16.20.35
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: 150
+  transform: 3
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 10
+  learning_rate: 0.001
+  seed: 42069
+id: 10-Kristen_MintCream-m0rs39ot
+model:
+  checkpoint_path: null
+  name: 10-Kristen_MintCream-2023-03-28_10.24.53
+  train: true
+  version: 8
+name: null
+run: 10

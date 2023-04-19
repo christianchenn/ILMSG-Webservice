@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audiov2
+hyperparameters:
+  batch_size: 1024
+  epochs: 10000
+  learning_rate: 0.001
+  seed: 777
+id: 2-Kendra_DodgerBlue-kdwjktz9
+model:
+  checkpoint_path: null
+  name: 2-Kendra_DodgerBlue-2023-04-01_18.29.42
+  train: true
+  version: 1
+run: 2

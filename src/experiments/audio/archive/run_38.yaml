@@ -1,0 +1,23 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+data:
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: full
+  type: audio
+hyperparameters:
+  batch_size: 725
+  epochs: 3000
+  learning_rate: 0.0001
+  seed: 420
+id: 38-Deborah_Ivory-jzynvlv6
+model:
+  checkpoint_path: null
+  name: 38-Deborah_Ivory-2023-03-22_02.25.48
+  train: true
+  version: 11
+run: 38

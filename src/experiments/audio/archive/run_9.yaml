@@ -1,0 +1,24 @@
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: 10
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 256
+  epochs: 100
+  frames: 26
+  learning_rate: 5.0e-05
+  n_mels: 128
+  seed: 420
+id: 9-Tiffany_DeepSkyBlue-fn03jp4p
+model: AudioAEV3
+name: 9-Tiffany_DeepSkyBlue-2023-03-10_11.21.48
+run: 9

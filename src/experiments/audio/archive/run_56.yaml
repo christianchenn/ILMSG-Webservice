@@ -1,0 +1,25 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-500
+  type: audio
+hyperparameters:
+  batch_size: 768
+  epochs: 10000
+  learning_rate: 1.0e-05
+  seed: 555
+id: 56-Joann_Gold-5zccer91
+model:
+  checkpoint_path: null
+  name: 56-Joann_Gold-2023-04-02_16.34.03
+  train: true
+  version: 22
+run: 56

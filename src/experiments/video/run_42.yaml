@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 150
+  learning_rate: 0.001
+  seed: 8
+id: 42-Laura_Beige-3o92uhwe
+model:
+  checkpoint_path: null
+  name: 42-Laura_Beige-2023-04-13_18.05.49
+  train: true
+  version: 41
+name: null
+run: 42

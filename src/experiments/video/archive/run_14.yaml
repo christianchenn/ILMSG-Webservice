@@ -1,0 +1,30 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 49-Jessica_Linen-2023-03-29_12.07.28
+  audio_version: 9
+  frame_size: 150
+  frames: 25
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-150
+  transform: 2
+  type: video
+hyperparameters:
+  batch_size: 8
+  epochs: 40
+  learning_rate: 0.0001
+  seed: 888
+id: 14-Amanda_Bisque-492qjw7q
+model:
+  checkpoint_path: null
+  name: 14-Amanda_Bisque-2023-03-30_13.54.12
+  train: true
+  version: 13
+name: null
+run: 14

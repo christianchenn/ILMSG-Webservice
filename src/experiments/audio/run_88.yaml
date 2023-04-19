@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Mikhael Chris-full
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 750
+  learning_rate: 0.001
+  seed: 8
+id: 88-Jacqueline_Silver-22sp8h9r
+model:
+  checkpoint_path: null
+  name: 88-Jacqueline_Silver-2023-04-18_10.32.12
+  train: true
+  version: 40
+run: 88

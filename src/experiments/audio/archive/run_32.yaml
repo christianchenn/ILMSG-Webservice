@@ -1,0 +1,25 @@
+checkpoint_path: null
+config:
+  accelerator: gpu
+  devices: 1
+  gender: pria
+  logging: true
+  precision: 32
+  train: true
+  type: audio
+data:
+  size: full
+  type: audio
+  version: sc
+description: Trained with Split, Converted Data 25 Frames
+hyperparameters:
+  batch_size: 800
+  epochs: 3000
+  frames: 24
+  learning_rate: 0.0001
+  n_mels: 128
+  seed: 420
+id: 32-Nancy_Orange-invaneef
+model: AudioAEV9
+name: 32-Nancy_Orange-2023-03-18_01.31.04
+run: 32

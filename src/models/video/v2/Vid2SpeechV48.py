@@ -35,7 +35,7 @@ class Vid2SpeechV48(pl.LightningModule):
         self.testing_table = wandb.Table(columns=["Mel Spectrogram Image", "Original Sound", "Predicted Sound", "PESQ", "STOI", "ESTOI","MSE"])
         pretrained_model = extract_layers(efficientnet_v2_s(weights=EfficientNet_V2_S_Weights.IMAGENET1K_V1).features, 0, 6)
         self.pretrained_model = freeze_layers(pretrained_model, "5.5.block.0.0.weight")
-        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=True)
+        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=None)
         
         # CNN Decoder
         self.conv_decoders = nn.Sequential(

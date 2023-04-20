@@ -38,10 +38,10 @@ class Vid2SpeechV42(pl.LightningModule):
             nn.BatchNorm3d(3),
             nn.ReLU(),
         )
-        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=True)
-        self.attention_2 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=True)       
-        self.attention_3 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=True)       
-        self.attention_4 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=True)       
+        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=None)
+        self.attention_2 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=None)       
+        self.attention_3 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=None)       
+        self.attention_4 = MultiheadAttention2D(in_channels=256, embed_dim=256, num_heads=4, mask=None)       
         self.conv_lstm_1 = ConvLSTM(in_channel=256,
                                     hidden_dim=128,
                                     out_channel=128,

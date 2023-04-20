@@ -12,12 +12,17 @@ from torchvision.models import vgg16, VGG16_Weights
 from torchvision.models import efficientnet_v2_s, EfficientNet_V2_S_Weights
 
 
-
+class extract_tensor(nn.Module):
+    def forward(self,x):
+        # Output shape (batch, features, hidden)
+        tensor, _ = x
+        # Reshape shape (batch, hidden)
+        return tensor
 # Input 128x128 Transform 
 # Menggunakan Attention
 # Mengunakan power to db
 # Target Audio (,2048)
-class Vid2SpeechV44(pl.LightningModule):
+class Vid2SpeechV51(pl.LightningModule):
     def __init__(self, run_name, learning_rate=1e-4, yaml_file=None):
         super().__init__()
         self.save_hyperparameters()
@@ -38,7 +43,7 @@ class Vid2SpeechV44(pl.LightningModule):
             nn.BatchNorm3d(3),
             nn.ReLU(),
         )
-        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=None)  
+        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=256, num_heads=4, mask=True)  
         
         # CNN Decoder
         self.conv_decoders = nn.Sequential(
@@ -70,7 +75,8 @@ class Vid2SpeechV44(pl.LightningModule):
             nn.ReLU(),
             nn.Flatten(),
             nn.LSTM(4000, 1024, 1, batch_first=True, bidirectional=True),
-            # nn.Linear(4000, 3072),
+            extract_tensor(),
+            nn.Linear(2048, 2048),
             # nn.Linear(3072, 2048)
         )
 
@@ -100,7 +106,7 @@ class Vid2SpeechV44(pl.LightningModule):
         
         # Decoder
         # B, C, NF, H, W
-        decoder_output, _ = self.conv_decoders(x)
+        decoder_output = self.conv_decoders(x)
         
         return decoder_output
     

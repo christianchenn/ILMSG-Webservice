@@ -43,8 +43,8 @@ class Vid2SpeechV47(pl.LightningModule):
             nn.BatchNorm3d(3),
             nn.ReLU(),
         )
-        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=512, num_heads=8, mask=True)
-        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=512, num_heads=8, mask=True)
+        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=512, num_heads=8, mask=None)
+        self.attention_1 = MultiheadAttention2D(in_channels=160, embed_dim=512, num_heads=8, mask=None)
         
         # CNN Decoder
         self.conv_decoders = nn.Sequential(

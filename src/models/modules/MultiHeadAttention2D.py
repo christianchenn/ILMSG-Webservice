@@ -3,9 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class MultiheadAttention2D(nn.Module):
-    def __init__(self, in_channels, embed_dim, num_heads, mask=False):
+    def __init__(self, in_channels, embed_dim, num_heads, mask=None):
         super(MultiheadAttention2D, self).__init__()
-        self.mask = None
+        self.mask = mask
         self.num_heads = num_heads
         self.embed_dim = embed_dim
         self.head_dim = embed_dim // num_heads
@@ -19,7 +19,7 @@ class MultiheadAttention2D(nn.Module):
         
     def create_mask(self, height, width):
         mask = torch.triu(torch.ones(height, width), diagonal=1).bool()
-        return mask
+        return mask.cuda()
     
     def forward(self, x):
         # x: (batch_size, in_channels, height, width) 
@@ -43,7 +43,9 @@ class MultiheadAttention2D(nn.Module):
         attn_scores = torch.matmul(q, k) * self.scaling
 
         if self.mask is not None:
-            attn_scores = attn_scores.masked_fill(self.create_mask(h,w) == 0, float('-inf'))
+            mask = self.create_mask(h,w)
+            mask = mask.view(1, 1, 1, *mask.size())
+            attn_scores = attn_scores.masked_fill(mask == 0, -1e10)
 
         # Apply softmax to obtain attention weights
         attn_weights = F.softmax(attn_scores, dim=-1)

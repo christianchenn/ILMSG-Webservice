@@ -70,6 +70,8 @@ def read_frames(filepath, color=True):
         counter = counter + 1
         if not color:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        else:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frames.append(frame)
     cap.release()
     return np.array(frames), (width, height)
@@ -123,3 +125,32 @@ def sew_audio(list_mels):
         wavs.append(wav)
     wavs = np.concatenate(wavs)
     return wavs
+
+def split_video_idx(frame_count, split_frames, stride=1):
+    split_idx = []
+    for i in range(0, frame_count, stride):
+      if (i + split_frames) <= frame_count:
+        split_idx.append((i, (i + split_frames)))
+    return split_idx
+
+def split_audio_idx(y, frame_length, split_frames, stride=1):
+    split_idx = []
+    for i in range(0, frame_length, stride):
+      if (i + split_frames) * frame_length <= len(y):
+        split_idx.append((i * frame_length, (i + split_frames) * frame_length))
+    return split_idx
+
+def extract_recording_file(input_string):
+    # Split the input string using the '/' separator
+    path_parts = input_string.split('/')
+
+    # Get the last part of the path, which is the filename
+    filename = path_parts[-1]
+
+    # Split the filename using the '_' separator
+    filename_parts = filename.split('_')
+
+    # Extract the desired substring by joining the first two parts of the filename
+    desired_substring = '_'.join(filename_parts[:2])
+
+    return desired_substring

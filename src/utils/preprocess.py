@@ -79,7 +79,8 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
     if local:
         def search_centroid(centroids, rid):
             print(f"R{rid}")
-            centroid = centroids[centroids['filename'].str.contains(f"R{rid}")]
+            centroid = centroids[centroids['id'] == rid]
+            print(centroid["filename"].count())
             if centroid["filename"].count() < 1:
                 return None
             return centroid
@@ -100,7 +101,12 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
             detector=detector,
             predictor=predictor
         )
+        centroid = {
+            "cx": centroid[0],
+            "cy": centroid[1]
+        }
 
+    print(centroid)
     cropped_frames = crop_lip(
         frames=gray_frames,
         centroid=[float(centroid["cx"]), float(centroid["cy"])],

@@ -1,6 +1,10 @@
+import cv2
 import librosa
+import numpy as np
+import pandas as pd
 import scipy
 import torch
+from werkzeug.utils import secure_filename
 
 from app.models import bp
 from src.utils.engine import yaml_read_directory, yaml_search, get_recording_paths, read_frames, sew_audio, \
@@ -50,18 +54,18 @@ def get(id):
 @bp.post("/generate")
 def generate():
     cwd = f"{os.getcwd()}/src/resources"
-    data = request.values.to_dict()
-    if len(request.values.to_dict().keys()) == 0:
-        data = request.get_json()
-    print(data)
+    form = request.form.to_dict()
+    print(form)
+    print(request.files)
 
     rid = None
     url = None
-    if "url" in request.values.to_dict().keys():
-        url = data["url"]
-    else:
-        rid = data["rid"]
-    run_model = data["run"]
+    if "url" in request.form.to_dict().keys() and form["url"] != "":
+        url = form["url"]
+    elif "rid" in request.form.to_dict().keys() and form["rid"] != "":
+        rid = form["rid"]
+
+    run_model = form["run"]
     experiment = yaml_search(f"{cwd}/experiments/video", run_model)
 
     hparams = experiment["hyperparameters"]
@@ -104,9 +108,24 @@ def generate():
         # Load Video CKPT
         visual_model = load_model(visual_model, cwd, "video", data["frames"], model_conf["name"])
 
-    if url:
+    # 3 Types of Input
+    if url is not None:
         pass
-    else:
+    elif 'file' in request.files:
+        video_file = request.files['file']
+        filename = secure_filename(video_file.filename)
+        print(filename)
+        video_file.save(filename)
+        ori_video, (h, w) = read_frames(filename, True)
+        os.remove(filename)
+
+    elif rid is not None:
+        recordings = pd.read_json(f"{cwd}/resources/config/recordings.json")
+        recording = recordings[recordings["rid"] == rid]
+        speakers = pd.read_json(f"{cwd}/resources/config/speakers.csv")
+        speaker = speakers[speakers["id"] == recording["spid"].item()]
+        gender = "pria" if speaker['gender'] == "L" else "wanita"
+
         processed_dir = f"{cwd}/data/processed"
         interim_dir = f"{cwd}/data/interim/{data['gender']}"
         raw_video_dir = f"{interim_dir}/video/raw"
@@ -119,6 +138,7 @@ def generate():
         else:
             arr_size = [int(arr_size[0]), int(arr_size[1])]
 
+        print(raw_video_dir)
         recording_filename = get_recording_filename(rid, raw_video_dir).split(".")[0]
         ori_video_filename = f"{recording_filename}.MP4"
         ori_audio_filename = f"{recording_filename}.WAV"

@@ -13,14 +13,17 @@ def create_app(config_class=Config):
     app.config['CORS_HEADERS'] = 'Content-Type'
 
     # cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:5173"}})
-    cors = CORS(app, resources={r"/models/*": {"origins": "*"}})
+    # cors = CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Initialize Flask extensions here
 
     # Register blueprints here
     from app.main import bp as main_bp
     from app.models import bp as models_bp
+    from app.recording import bp as recording_bp
     app.register_blueprint(main_bp, url_prefix='/main')
+    app.register_blueprint(recording_bp, url_prefix='/recording')
     app.register_blueprint(models_bp, url_prefix='/models')
 
     # app/__init__.py

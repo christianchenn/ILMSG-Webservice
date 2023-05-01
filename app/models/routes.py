@@ -4,11 +4,12 @@ import torch
 
 from app.models import bp
 from src.utils.engine import yaml_read_directory, yaml_search, get_recording_paths, read_frames, sew_audio, \
-    extract_recording_file, read_label
+    extract_recording_file, read_label, get_recording_filename, predict_with_files, predict
 from flask import request, jsonify
 import os
 
 from src.utils.model import get_visual_model, get_audio_model, find_ckpt
+from src.utils.preprocess import preprocess_video, split_video, split_audio
 from src.utils.transforms import get_video_transforms
 from src.utils.video import combine_video
 from datetime import datetime
@@ -36,7 +37,7 @@ def fetch():
 @bp.get('/<int:id>')
 def get(id):
     cwd = os.getcwd()
-    experiment = yaml_search(f"{cwd}/src/experiments/video", id)
+    experiment = yaml_search(f"{cwd}/src/resources/experiments/video", id)
     return {
         "_meta": {
             "status": 200,
@@ -53,11 +54,13 @@ def generate():
     if len(request.values.to_dict().keys()) == 0:
         data = request.get_json()
     print(data)
-    # recording = data["rid"]
-    recording = 3306
+
+    rid = None
     url = None
     if "url" in request.values.to_dict().keys():
         url = data["url"]
+    else:
+        rid = data["rid"]
     run_model = data["run"]
     experiment = yaml_search(f"{cwd}/experiments/video", run_model)
 
@@ -73,6 +76,18 @@ def generate():
 
     visual_model = get_visual_model(model_conf["version"], learning_rate, model_conf["name"], experiment)
     audio_model = get_audio_model(data["audio_version"], learning_rate, data["audio_run"])
+
+    # Filenames for Target
+    dt = datetime.now()
+    time = int(dt.strftime("%Y%m%d%H%M%S"))
+    filepath = f"{cwd}/results"
+    filename = f"{time}"
+    filename_prediction = f"{filename}_Prediction.MP4"
+    filepath_prediction = f"{filepath}/{filename_prediction}"
+    filename_latent = f"{filename}_Latent.MP4"
+    filepath_latent = f"{filepath}/{filename_latent}"
+    filename_ori = f"{filename}_Original.MP4"
+    filepath_ori = f"{filepath}/{filename_ori}"
 
     if visual_model == None or audio_model == None:
         raise Exception("No Model Found")
@@ -93,81 +108,80 @@ def generate():
         pass
     else:
         processed_dir = f"{cwd}/data/processed"
+        interim_dir = f"{cwd}/data/interim/{data['gender']}"
+        raw_video_dir = f"{interim_dir}/video/raw"
+        audio_dir = f"{interim_dir}/audio"
+
         arr_size = str(data["frame_size"]).split("x")
         color = "" if not data["color"] else "-color"
         if len(arr_size) == 1:
             arr_size = [int(arr_size[0]), int(arr_size[0])]
         else:
             arr_size = [int(arr_size[0]), int(arr_size[1])]
-        video_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/video/{arr_size[0]}x{arr_size[1]}{color}/F{data['frames']}"
-        label_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/label/mels-{data['n_mels']}/{data['audio_run']}/F{data['frames']}"
-        label_files = get_recording_paths(recording, label_dir)
-        video_files = get_recording_paths(recording, video_dir)
-        interim_dir = f"{cwd}/data/interim/{data['gender']}"
-        raw_video_dir = f"{interim_dir}/video/raw"
-        audio_dir = f"{interim_dir}/audio"
-        ori_video_filename = f"{extract_recording_file(video_files[0])}.MP4"
-        ori_audio_filename = f"{extract_recording_file(video_files[0])}.WAV"
+
+        recording_filename = get_recording_filename(rid, raw_video_dir).split(".")[0]
+        ori_video_filename = f"{recording_filename}.MP4"
+        ori_audio_filename = f"{recording_filename}.WAV"
+
         ori_audio_path = f"{audio_dir}/{ori_audio_filename}"
+        ori_audio, _ = librosa.load(ori_audio_path, sr=16000)
+
         ori_video_path = f"{raw_video_dir}/{ori_video_filename}"
         ori_video, (h, w) = read_frames(ori_video_path, True)
 
-        dt = datetime.now()
-        time = int(dt.strftime("%Y%m%d%H%M%S"))
-        filepath = f"{cwd}/results"
-        filename = f"{time}"
-        filename_prediction = f"{filename}_Prediction.MP4"
-        filepath_prediction = f"{filepath}/{filename_prediction}"
-        filename_latent = f"{filename}_Latent.MP4"
-        filepath_latent = f"{filepath}/{filename_latent}"
-        filename_ori = f"{filename}_Original.MP4"
-        filepath_ori = f"{filepath}/{filename_ori}"
+        video_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/video/{arr_size[0]}x{arr_size[1]}{color}/F{data['frames']}"
+        label_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/label/mels-{data['n_mels']}/{data['audio_run']}/F{data['frames']}"
+        label_files = get_recording_paths(rid, label_dir)
+        video_files = get_recording_paths(rid, video_dir)
 
-        # Prediction
-        video_batch = []
-        for i, file in enumerate(video_files):
-            frames, (h, w) = read_frames(file, False)
-            f = []
-            for frame in frames:
-                f.append(transforms(torch.from_numpy(frame)))
-            video_batch.append(torch.stack(f))
-        video_batch = torch.stack(video_batch).cuda()
-        latents = visual_model(video_batch)
-        target_mels = audio_model.decoder(latents)
-        target_wav = sew_audio(target_mels)
-        combine_video(
-            filepath_prediction,
-            frames=ori_video,
-            audio=target_wav,
-            fps=25,
-            sr=16000
-        )
+        if len(video_files) > 0:
+            predict_with_files(
+                video_files=video_files,
+                filepaths=(filepath_prediction, filepath_latent, filepath_ori),
+                transforms=transforms,
+                ori_video=ori_video,
+                label_files=label_files,
+                audio_model=audio_model,
+                visual_model=visual_model,
+                ori_audio=ori_audio
+            )
+        else:
+            # Preprocess Video
+            preprocessed_frames = preprocess_video(
+                rid=rid,
+                transforms=transforms,
+                frames=ori_video,
+                vid_size=arr_size,
+                local=True,
+            )
+            # Split Video
+            video_batch = split_video(
+                frames=preprocessed_frames,
+                split_frames=data["frames"],
+                stride=data["frames"],
+            ).cuda()
 
-        # Latent Prediction
-        labels = []
-        for i, file in enumerate(label_files):
-            label = read_label(file)
-            labels.append(label)
-        labels = torch.stack(labels).cuda()
-        latent_mels = audio_model.decoder(labels)
-        latent_wav = sew_audio(latent_mels)
-        combine_video(
-            filepath_latent,
-            frames=ori_video,
-            audio=latent_wav,
-            fps=25,
-            sr=16000
-        )
+            # Predict Target for Validation
+            label_batch = split_audio(
+                y=ori_audio,
+                split_frames=data["frames"],
+                stride=data["frames"],
+                fps=25,
+                sr=16000
+            ).cuda()
+            label_batch = label_batch.unsqueeze(1)
+            label_batch = audio_model.encoder(label_batch)
 
-        # Original Video
-        y, _ = librosa.load(ori_audio_path, sr=16000)
-        combine_video(
-            filepath_ori,
-            frames=ori_video,
-            audio=y,
-            fps=25,
-            sr=16000
-        )
+            predict(
+                visual_model=visual_model,
+                filepaths=(filepath_prediction, filepath_latent, filepath_ori),
+                ori_video=ori_video,
+                video_batch=video_batch,
+                audio_model=audio_model,
+                ori_audio=ori_audio,
+                label_batch=label_batch
+            )
+
 
         return {
             "_meta": {

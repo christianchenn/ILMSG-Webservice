@@ -14,14 +14,14 @@ class Category(db.Model):
     name = db.Column(db.String(191))
 
 class Recording(db.Model):
-    __tablename__ = 'recordings'
+    __tablename__ = 'recording'
     id = db.Column(db.Integer, primary_key=True, unique=True)
     started_at = db.Column(db.DateTime)
     stopped_at = db.Column(db.DateTime)
     sessionId = db.Column(db.Integer, db.ForeignKey('sessions.id'))
     sentenceId = db.Column(db.Integer, db.ForeignKey('sentences.id'))
-    session = db.relationship('Session', back_populates='recordings')
-    sentence = db.relationship('Sentence', back_populates='recordings')
+    session = db.relationship('Session', back_populates='recording')
+    sentence = db.relationship('Sentence', back_populates='recording')
 
 class Sentence(db.Model):
     __tablename__ = 'sentences'

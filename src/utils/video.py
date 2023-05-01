@@ -10,29 +10,7 @@ import cv2
 from tqdm import tqdm
 from pathlib import Path
 import pathlib as p
-from src.utils.engine import split_audio_idx, split_video_idx
 import torch
-
-def split_video(input_dir, output_dir, set_type, paths, frame, color, stride=1, validate_only=False):
-    output_files = []
-    for file_path in tqdm(paths):
-        basename = os.path.basename(file_path).split(".")[0]
-
-        # Generate Video Path
-        Path(f"{output_dir}/{set_type}/").mkdir(parents=True, exist_ok=True)
-        output_path = f"{output_dir}/{set_type}/{basename}"
-        _path = f"{input_dir}/{file_path}.MP4"
-
-        outputs = vid_to_batch(
-            input_file=_path,
-            output_file=output_path,
-            split_frames=frame,
-            get_path_only=validate_only,
-            stride = stride,
-            color=color
-        )
-        output_files += outputs
-    return output_files
 
 
 def convert_framerate(input_file, output_file):
@@ -68,27 +46,13 @@ def cut_frames(frames, target_frames=82):
 
     return False
 
+
 def write_video(path, frames, fps, width, height, color):
     fourCC = cv2.VideoWriter_fourcc(*"mp4v")
     out = cv2.VideoWriter(path, int(fourCC), fps, (width, height), isColor=color)
     for frame in frames:
         out.write(frame)
     out.release()
-
-def vid_to_batch(input_file, output_file, color=True, stride=1, fps=25, split_frames=25, get_path_only=False):
-    outputs = []
-
-    frames, (width, height) = read_frames(input_file, color)
-    frames = cut_frames(frames, 82)
-    split_idx = split_video_idx(len(frames), split_frames, stride=stride)
-    for i, j in split_idx:
-        cropped_frames = frames[i:j]
-        final_output = f"{output_file}_{i}-{j}.MP4"
-        outputs.append(final_output)
-        if not get_path_only:
-            write_video(final_output, cropped_frames, fps, width, height, color)
-
-    return outputs
 
 
 def feature_landmarks(landmarks):
@@ -108,7 +72,8 @@ def centroid(vertices):
 
 def lip_to_centroid(frames, detector, predictor):
     centroids = []
-    for frame in frames:
+    print("Calculate Centroid")
+    for frame in tqdm(frames):
         faces = detector(frame, 1)
         landmark = predictor(frame, faces[0])
         landmarks = np.array([(p.x, p.y) for p in landmark.parts()])
@@ -153,7 +118,7 @@ def read_frames(filepath, color=True):
     return np.array(frames), (width, height)
 
 
-def crop_lip(frames, centroid, out, vid_size):
+def crop_lip(frames, centroid, vid_size):
     half_len_w = vid_size[0] / 2
     half_len_h = vid_size[1] / 2
     # Calculate new Vertex
@@ -165,7 +130,6 @@ def crop_lip(frames, centroid, out, vid_size):
         frame[new_V1[1]:new_V2[1], new_V1[0]:new_V2[0]]
         # Crop
         cropped = frame[new_V1[1]:new_V2[1], new_V1[0]:new_V2[0]]
-        out.write(np.array(cropped))
         cropped_frames.append(cropped)
     return np.array(cropped_frames)
 
@@ -180,6 +144,7 @@ def stretch_contrast(frame, p):
     imin, imax = imin[0], imax[0]
     frame = torch.clamp(frame, imin, imax)
     return torch.round((frame - rmin) * ((imax - imin) / (rmax - rmin)) + imin)
+
 
 from skimage import exposure, io
 

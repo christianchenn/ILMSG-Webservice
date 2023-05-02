@@ -120,14 +120,14 @@ def generate():
         os.remove(filename)
 
     elif rid is not None:
-        recordings = pd.read_json(f"{cwd}/resources/config/recordings.json")
-        recording = recordings[recordings["rid"] == rid]
-        speakers = pd.read_json(f"{cwd}/resources/config/speakers.csv")
+        recordings = pd.read_json(f"{cwd}/config/recordings.json")
+        recording = recordings[recordings["rid"] == int(rid)]
+        speakers = pd.read_csv(f"{cwd}/config/speakers.csv", delimiter=";")
         speaker = speakers[speakers["id"] == recording["spid"].item()]
-        gender = "pria" if speaker['gender'] == "L" else "wanita"
+        gender = "pria" if speaker['gender'].item() == "L" else "wanita"
 
         processed_dir = f"{cwd}/data/processed"
-        interim_dir = f"{cwd}/data/interim/{data['gender']}"
+        interim_dir = f"{cwd}/data/interim/{gender}"
         raw_video_dir = f"{interim_dir}/video/raw"
         audio_dir = f"{interim_dir}/audio"
 
@@ -149,10 +149,12 @@ def generate():
         ori_video_path = f"{raw_video_dir}/{ori_video_filename}"
         ori_video, (h, w) = read_frames(ori_video_path, True)
 
-        video_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/video/{arr_size[0]}x{arr_size[1]}{color}/F{data['frames']}"
-        label_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{data['gender']}/label/mels-{data['n_mels']}/{data['audio_run']}/F{data['frames']}"
-        label_files = get_recording_paths(rid, label_dir)
-        video_files = get_recording_paths(rid, video_dir)
+        video_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{gender}/video/{arr_size[0]}x{arr_size[1]}{color}/F{data['frames']}"
+        label_dir = f"{processed_dir}/{data['size']}x/seed-{seed}/{gender}/label/mels-{data['n_mels']}/{data['audio_run']}/F{data['frames']}"
+        video_files, label_files = [], []
+        if os.path.isdir(video_dir) and os.path.isdir(label_dir):
+            label_files = get_recording_paths(rid, label_dir)
+            video_files = get_recording_paths(rid, video_dir)
 
         if len(video_files) > 0:
             predict_with_files(

@@ -14,7 +14,7 @@ from src.utils.video import combine_video
 
 def yaml_read_directory(directory_path, count=10, page=0, sort_order='desc'):
     files = os.listdir(directory_path)
-    files = [f for f in files if f.endswith('.yaml')]
+    files = [f for f in files if f.endswith('.yaml') and "999" not in f]
     files = sorted(files, key=lambda x: int(x.split('_')[1].split('.')[0]))
     if sort_order == "desc":
         files.reverse()

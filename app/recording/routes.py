@@ -12,8 +12,11 @@ def fetch():
     set_type = None
     speaker_name = None
     id = int(query["id"])
-    if "set_type" in query:
-        set_type = query["set_type"]
+    print(query)
+    print(query.keys())
+    if "filter[datasetType]" in query.keys():
+        set_type = query["filter[datasetType]"]
+        print(set_type)
     if "speaker_name" in query:
         speaker_name = query["speaker_name"]
     experiment = yaml_search(f"{cwd}/src/resources/experiments/video", id)

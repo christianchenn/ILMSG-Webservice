@@ -1,0 +1,31 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
+  audio_to_db: true
+  audio_version: 40
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-500
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 32
+  epochs: 30
+  learning_rate: 0.001
+  seed: 8
+id: 36-Destiny_PaleGoldenRod-70nke23l
+model:
+  checkpoint_path: 35-Lauren_MediumBlue-2023-04-12_08.19.10/best
+  name: 36-Destiny_PaleGoldenRod-2023-04-12_09.08.57
+  train: true
+  version: 36
+name: null
+run: 36

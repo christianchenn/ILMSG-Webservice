@@ -690,7 +690,7 @@ def predict_audio_labels(dataset, output_dir, frame_length, model_version, model
     cwd = os.getcwd()
     ckpt_path = f"{cwd}/models/ilmsg-audio/f{frame_length}/{model_name}".replace("\\", "/")
     ckpt_file = find_ckpt(ckpt_path, "val_loss", "lowest")
-    print(ckpt_file)
+    print("CKPT_FILE", ckpt_file)
     model = get_audio_model(int(model_version)).load_from_checkpoint(f"{ckpt_path}/{ckpt_file}")
     # print(model_name)
     # model = get_audio_model(model_name).load_from_checkpoint(
@@ -724,8 +724,6 @@ def extract_model(model, start_layer, end_layer, freeze_until):
     # Find the start and end layers in the model
     valid = False
     for name, module in model.named_modules():
-        print("NAME:", name)
-        print("start_layer", start_layer)
         if start_layer == name:
             valid = True
         if end_layer == name:
@@ -753,7 +751,6 @@ def freeze_layers(model, freeze_until=None):
             param.requires_grad = True
         if not None:
             for name, param in model.named_parameters():
-                print(name)
                 if name == freeze_until:
                     break
                 param.requires_grad = False

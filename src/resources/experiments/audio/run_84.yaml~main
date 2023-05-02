@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Michael Kevin-full
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 750
+  learning_rate: 0.001
+  seed: 8
+id: 84-Leslie_DarkOrchid-1cv432p0
+model:
+  checkpoint_path: null
+  name: 84-Leslie_DarkOrchid-2023-04-14_16.10.34
+  train: true
+  version: 40
+run: 84

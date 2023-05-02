@@ -26,8 +26,8 @@ class Vid2SpeechV41(pl.LightningModule):
         self.yaml_file = yaml_file
         self.future_len = 20 
         self.scores = {}
-        self.validation_table = wandb.Table(columns=["Mel Spectrogram Image", "Original Sound", "Predicted Sound", "PESQ", "STOI", "ESTOI"])
-        self.testing_table = wandb.Table(columns=["Mel Spectrogram Image", "Original Sound", "Predicted Sound", "PESQ", "STOI", "ESTOI"])
+        self.validation_table = wandb.Table(columns=["Mel Spectrogram Image", "Original Sound", "Predicted Sound", "PESQ", "STOI", "ESTOI","MSE"])
+        self.testing_table = wandb.Table(columns=["Mel Spectrogram Image", "Original Sound", "Predicted Sound", "PESQ", "STOI", "ESTOI","MSE"])
         pretrained_model = extract_layers(efficientnet_v2_s(weights=EfficientNet_V2_S_Weights.IMAGENET1K_V1).features, 0, 6)
         self.pretrained_model = freeze_layers(pretrained_model, "5.5.block.0.0.weight")
         self.feature_extractor = nn.Sequential(

@@ -26,7 +26,7 @@ id: 64-Natalie_Brown-lmhwk3gu
 model:
   checkpoint_path: null
   name: 64-Natalie_Brown-2023-05-01_02.23.55
-  train: true
+  train: false
   version: 46
 name: null
 run: 64

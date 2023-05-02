@@ -22,10 +22,10 @@ hyperparameters:
   epochs: 50
   learning_rate: 0.001
   seed: 8
-id: null
+id: 52-Olivia_Linen-10tpep58
 model:
   checkpoint_path: null
-  name: null
+  name: 52-Olivia_Linen-2023-04-15_10.57.35
   train: true
   version: 50
 name: null

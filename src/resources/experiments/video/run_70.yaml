@@ -6,7 +6,7 @@ config:
   precision: 32
   summary-only: false
 data:
-  audio_run: 88-Jacqueline_Silver-2023-04-18_10.32.12
+  audio_run: 84-Leslie_DarkOrchid-2023-04-14_16.10.34
   audio_to_db: true
   audio_version: 40
   color: false
@@ -14,19 +14,19 @@ data:
   frames: 20
   gender: pria
   n_mels: 128
-  size: Mikhael Chris-full
+  size: Michael Kevin-full
   transform: 4
   type: video
 hyperparameters:
   batch_size: 10
-  epochs: 30
+  epochs: 10
   learning_rate: 0.001
   seed: 8
-id: 63-Stacey_IndianRed-waiomq65
+id: 70-Melissa_MediumTurquoise-2cs5kfgk
 model:
   checkpoint_path: null
-  name: 63-Stacey_IndianRed-2023-05-01_00.46.15
-  train: false
-  version: 45
+  name: 70-Melissa_MediumTurquoise-2023-05-02_21.19.18
+  train: true
+  version: 47
 name: null
-run: 63
+run: 70

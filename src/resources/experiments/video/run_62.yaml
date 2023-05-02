@@ -26,7 +26,7 @@ id: 62-Tammy_Plum-2ea3y56g
 model:
   checkpoint_path: null
   name: 62-Tammy_Plum-2023-04-30_22.13.17
-  train: true
+  train: false
   version: 41
 name: null
 run: 62

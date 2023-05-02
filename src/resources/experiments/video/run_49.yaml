@@ -26,7 +26,7 @@ id: 49-Alison_MediumBlue-2asz0gj3
 model:
   checkpoint_path: null
   name: 49-Alison_MediumBlue-2023-04-14_21.42.42
-  train: false
+  train: true
   version: 47
 name: null
 run: 49

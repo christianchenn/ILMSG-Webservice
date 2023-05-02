@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 88-Jacqueline_Silver-2023-04-18_10.32.12
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Mikhael Chris-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 30
+  learning_rate: 0.001
+  seed: 8
+id: 64-Natalie_Brown-lmhwk3gu
+model:
+  checkpoint_path: null
+  name: 64-Natalie_Brown-2023-05-01_02.23.55
+  train: true
+  version: 46
+name: null
+run: 64

@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 90-Erin_Green-2023-05-01_14.44.46
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 20
+  learning_rate: 0.001
+  seed: 8
+id: 67-Tricia_LightSeaGreen-uo9k2eg5
+model:
+  checkpoint_path: null
+  name: 67-Tricia_LightSeaGreen-2023-05-02_00.16.38
+  train: true
+  version: 45
+name: null
+run: 67

@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 84-Leslie_DarkOrchid-2023-04-14_16.10.34
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 50
+  learning_rate: 0.001
+  seed: 8
+id: 57-Brittany_SaddleBrown-3ogzeaue
+model:
+  checkpoint_path: null
+  name: 57-Brittany_SaddleBrown-2023-04-21_20.17.16
+  train: true
+  version: 53
+name: null
+run: 57

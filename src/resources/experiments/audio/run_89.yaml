@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: 500
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 750
+  learning_rate: 0.0001
+  seed: 8
+id: 89-Teresa_DarkSalmon
+model:
+  checkpoint_path: null
+  name: 89-Teresa_DarkSalmon-2023-04-27_20.57.59
+  train: true
+  version: 40
+run: 89

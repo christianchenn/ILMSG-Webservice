@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 88-Jacqueline_Silver-2023-04-18_10.32.12
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Mikhael Chris-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 91-Rebecca_BurlyWood-2xul7k2a
+model:
+  checkpoint_path: null
+  name: 91-Rebecca_BurlyWood-2023-05-14_12.47.54
+  train: true
+  version: 57
+name: null
+run: 91

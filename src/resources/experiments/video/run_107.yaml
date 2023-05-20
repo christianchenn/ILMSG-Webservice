@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 104-Kimberly_LemonChiffon-2023-05-17_21.00.03
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  size: full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 107-Michelle_DarkSlateBlue-39iaanms
+model:
+  checkpoint_path: null
+  name: 107-Michelle_DarkSlateBlue-2023-05-18_19.48.21
+  train: true
+  version: 46
+name: null
+run: 107

@@ -26,7 +26,7 @@ id: 53-Amy_MediumOrchid-29u8ton8
 model:
   checkpoint_path: null
   name: 53-Amy_MediumOrchid-2023-04-16_20.41.25
-  train: true
+  train: false
   version: 45
 name: null
 run: 53

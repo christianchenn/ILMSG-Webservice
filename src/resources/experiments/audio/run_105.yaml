@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  normalize: false
+  size: full
+  type: audio
+hyperparameters:
+  batch_size: 512
+  epochs: 250
+  learning_rate: 0.0001
+  seed: 8
+id: 105-Catherine_PaleGoldenRod-w7yiklna
+model:
+  checkpoint_path: null
+  name: 105-Catherine_PaleGoldenRod-2023-05-17_22.14.03
+  train: true
+  version: 47
+run: 105

@@ -21,6 +21,6 @@ id: 88-Jacqueline_Silver-22sp8h9r
 model:
   checkpoint_path: null
   name: 88-Jacqueline_Silver-2023-04-18_10.32.12
-  train: true
+  train: false
   version: 40
 run: 88

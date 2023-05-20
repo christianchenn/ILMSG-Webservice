@@ -66,7 +66,7 @@ class VideoLogCallback(Callback):
                 table=pl_module.testing_table
             )
         
-        # Calculate PESQ & ESTOI & STOI
+        # Calculate PESQ & ESTOI & S
         calculate_accuracy(
             video_model=pl_module,
             y=y,

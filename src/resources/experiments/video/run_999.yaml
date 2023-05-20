@@ -4,29 +4,29 @@ config:
   logging: true
   num_workers: 10
   precision: 32
-  summary-only: false
+  summary-only: true
 data:
-  audio_run: 89-Teresa_DarkSalmon-2023-04-27_20.57.59
+  audio_run: 98-Megan_BlueViolet-2023-05-15_16.08.59
   audio_to_db: true
-  audio_version: 40
+  audio_version: 47
   color: false
   frame_size: 150
   frames: 20
   gender: pria
   n_mels: 128
-  size: 500
+  size: Jason Gerald Sutanto-full
   transform: 4
   type: video
 hyperparameters:
   batch_size: 12
-  epochs: 100
-  learning_rate: 0.0005
+  epochs: 25
+  learning_rate: 0.001
   seed: 8
 id: null
 model:
   checkpoint_path: null
   name: null
   train: true
-  version: 45
+  version: 46
 name: null
 run: 999

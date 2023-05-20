@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 98-Megan_BlueViolet-2023-05-15_16.08.59
+  audio_to_db: true
+  audio_version: 47
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Jason Gerald Sutanto-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 95-Sonya_Maroon-3atjw2zq
+model:
+  checkpoint_path: null
+  name: 95-Sonya_Maroon-2023-05-15_20.55.51
+  train: true
+  version: 58
+name: null
+run: 95

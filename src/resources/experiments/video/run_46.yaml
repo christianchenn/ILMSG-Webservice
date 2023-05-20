@@ -4,7 +4,7 @@ config:
   logging: true
   num_workers: 10
   precision: 32
-  summary-only: false
+  summary-only: true
 data:
   audio_run: 79-Kristi_BlanchedAlmond-2023-04-09_15.52.37
   audio_to_db: true

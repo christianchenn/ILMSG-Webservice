@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 92-Heather_Peru-2023-05-04_17.07.35
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Mikhael Setiawan-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 76-Valerie_AntiqueWhite-zp2i5ntd
+model:
+  checkpoint_path: null
+  name: 76-Valerie_AntiqueWhite-2023-05-04_22.42.04
+  train: true
+  version: 45
+name: null
+run: 76

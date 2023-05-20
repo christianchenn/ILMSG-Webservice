@@ -21,6 +21,6 @@ id: 82-Jennifer_SpringGreen-2psnc6h0
 model:
   checkpoint_path: null
   name: 82-Jennifer_SpringGreen-2023-04-10_11.06.58
-  train: true
+  train: false
   version: 43
 run: 82

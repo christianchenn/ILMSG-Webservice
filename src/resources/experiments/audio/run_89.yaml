@@ -21,6 +21,6 @@ id: 89-Teresa_DarkSalmon
 model:
   checkpoint_path: null
   name: 89-Teresa_DarkSalmon-2023-04-27_20.57.59
-  train: true
+  train: false
   version: 40
 run: 89

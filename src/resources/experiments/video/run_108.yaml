@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 105-Catherine_PaleGoldenRod-2023-05-17_22.14.03
+  audio_to_db: true
+  audio_version: 47
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  size: full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 108-Colleen_Chartreuse-2qox27zm
+model:
+  checkpoint_path: null
+  name: 108-Colleen_Chartreuse-2023-05-19_01.36.49
+  train: true
+  version: 58
+name: null
+run: 108

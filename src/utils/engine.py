@@ -231,6 +231,7 @@ def predict(visual_model, video_batch, audio_model, filepaths, ori_video, ori_au
         sr=16000
     )
 
+    return (latent_mels, label_batch, ori_audio), (target_mels, latents, target_wav)
 
 def predict_with_file():
     pass
@@ -255,7 +256,7 @@ def predict_with_files(video_files, label_files, transforms, visual_model, audio
         labels.append(label)
     labels = torch.stack(labels).cuda()
 
-    predict(
+    return predict(
         visual_model=visual_model,
         audio_model=audio_model,
         ori_video=ori_video,

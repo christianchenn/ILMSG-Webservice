@@ -14,10 +14,6 @@ import torch
 
 
 def convert_framerate(input_file, output_file):
-    # ffmpeg -i input.mp4 -vf "minterpolate='mi_mode=mci:mc_mode=aobmc:me_mode=bidir:me=ds:fps=50'" output.mp4
-    # ffmpeg -i input.mp4 -vf "minterpolate='mi_mode=mci:mc_mode=aobmc:me_mode=bidir:me=ds:fps=25'" -an -crf 18 output.mp4
-    # ffmpeg -i R17156_S464.MP4 -vf "minterpolate='mi_mode=mci:mc_mode=aobmc:me_mode=bidir:me=ds:fps=25'" -an -crf 18 output_optical2.mp4
-
     command = [
         '/usr/bin/ffmpeg',
         '-i', f"{input_file}",

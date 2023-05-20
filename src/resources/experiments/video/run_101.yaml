@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 103-Christina_Crimson-2023-05-17_12.42.04
+  audio_to_db: true
+  audio_version: 47
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  size: Cherilyn Eugenia-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 101-Debra_SlateBlue-2eetod6n
+model:
+  checkpoint_path: null
+  name: 101-Debra_SlateBlue-2023-05-18_10.24.48
+  train: true
+  version: 58
+name: null
+run: 101

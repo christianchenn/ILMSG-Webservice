@@ -26,7 +26,7 @@ id: 68-Carla_DarkOrange-125qbgce
 model:
   checkpoint_path: null
   name: 68-Carla_DarkOrange-2023-05-02_07.26.58
-  train: true
+  train: false
   version: 46
 name: null
 run: 68

@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 96-Cathy_DarkSlateGray-2023-05-13_15.08.27
+  audio_to_db: true
+  audio_version: 47
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 14
+  epochs: 15
+  learning_rate: 0.001
+  seed: 8
+id: 88-Kimberly_DarkTurquoise-gvcgqepl
+model:
+  checkpoint_path: null
+  name: 88-Kimberly_DarkTurquoise-2023-05-13_17.51.59
+  train: false
+  version: 56
+name: null
+run: 88

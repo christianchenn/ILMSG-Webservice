@@ -26,7 +26,7 @@ id: 67-Tricia_LightSeaGreen-uo9k2eg5
 model:
   checkpoint_path: null
   name: 67-Tricia_LightSeaGreen-2023-05-02_00.16.38
-  train: true
+  train: false
   version: 45
 name: null
 run: 67

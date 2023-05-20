@@ -6,8 +6,8 @@ class ConvLSTM(nn.Module):
     
     def __init__(self, in_channel, out_channel, future_len, hidden_dim=64, num_encoders=2, num_decoders=2) -> None:
        super().__init__()
-       self.encoders = []
-       self.decoders = []
+       self.encoders = nn.ModuleList()
+       self.decoders = nn.ModuleList()
        self.in_channel = in_channel
        self.out_channel = out_channel
        self.future_len = future_len

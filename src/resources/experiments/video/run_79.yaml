@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 93-Lisa_SteelBlue-2023-05-06_09.53.19
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Jason Gerald Sutanto-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 50
+  learning_rate: 0.001
+  seed: 8
+id: 79-Maria_DarkViolet-1ctj80hd
+model:
+  checkpoint_path: null
+  name: 79-Maria_DarkViolet-2023-05-08_00.51.18
+  train: true
+  version: 41
+name: null
+run: 79

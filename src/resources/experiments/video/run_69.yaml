@@ -26,7 +26,7 @@ id: 69-Elizabeth_LightSlateGray-1opbcajk
 model:
   checkpoint_path: null
   name: 69-Elizabeth_LightSlateGray-2023-05-02_13.34.24
-  train: true
+  train: false
   version: 47
 name: null
 run: 69

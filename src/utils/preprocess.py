@@ -38,11 +38,11 @@ def pad_wav(y, total_frames, frame_length):
     return y
 
 
-def split_audio(y, sr, fps, split_frames=20, stride=None):
+def split_audio(y, sr, fps, split_frames=20, stride=None, total_frames=82):
     frame_length = sr // fps
     if stride == None:
         stride = split_frames
-    y = pad_wav(y, 82, frame_length)
+    y = pad_wav(y, total_frames, frame_length)
     split_idx = split_audio_idx(y, frame_length, split_frames, stride=stride)
     audio_batch = []
     for i, j in split_idx:
@@ -94,13 +94,16 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
     if centroid is None:
         import dlib
         detector = dlib.get_frontal_face_detector()
-        predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
+        predictor = dlib.shape_predictor(f"{os.getcwd()}/../../src/resources/config/shape_predictor_68_face_landmarks.dat")
+        # predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
+        print(detector, predictor)
         # Calculate Centroid
         centroid = lip_to_centroid(
             frames=gray_frames,
             detector=detector,
             predictor=predictor
         )
+        print(centroid)
         centroid = {
             "cx": centroid[0],
             "cy": centroid[1]

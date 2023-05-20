@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 91-Heather_DarkViolet-2023-05-03_09.43.04
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  size: Cherilyn Eugenia-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 97-Kelly_MediumSeaGreen-2g2fzflq
+model:
+  checkpoint_path: null
+  name: 97-Kelly_MediumSeaGreen-2023-05-17_14.52.22
+  train: true
+  version: 45
+name: null
+run: 97

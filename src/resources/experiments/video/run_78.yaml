@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 92-Heather_Peru-2023-05-04_17.07.35
+  audio_to_db: true
+  audio_version: 40
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Mikhael Setiawan-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 10
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 78-Amanda_Linen-2z0dqqj0
+model:
+  checkpoint_path: null
+  name: 78-Amanda_Linen-2023-05-05_10.17.40
+  train: true
+  version: 47
+name: null
+run: 78

@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: pria
+  n_mels: 128
+  normalize: false
+  size: Mikhael Setiawan-full
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 750
+  learning_rate: 0.0001
+  seed: 8
+id: 92-Heather_Peru-g4tc9trr
+model:
+  checkpoint_path: null
+  name: 92-Heather_Peru-2023-05-04_17.07.35
+  train: true
+  version: 40
+run: 92

@@ -21,6 +21,6 @@ id: 87-Wendy_Khaki-3i0pmw5q
 model:
   checkpoint_path: null
   name: 87-Wendy_Khaki-2023-04-16_17.42.41
-  train: true
+  train: false
   version: 40
 run: 87

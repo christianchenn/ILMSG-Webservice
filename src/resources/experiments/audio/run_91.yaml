@@ -1,0 +1,26 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  precision: 32
+  summary-only: false
+data:
+  audio_to_db: true
+  frames: 20
+  gender: wanita
+  n_mels: 128
+  normalize: false
+  size: Cherilyn Eugenia-full
+  type: audio
+hyperparameters:
+  batch_size: 256
+  epochs: 750
+  learning_rate: 0.0001
+  seed: 8
+id: 91-Heather_DarkViolet-1fjy9967
+model:
+  checkpoint_path: null
+  name: 91-Heather_DarkViolet-2023-05-03_09.43.04
+  train: true
+  version: 40
+run: 91

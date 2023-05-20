@@ -1,0 +1,32 @@
+config:
+  accelerator: gpu
+  devices: 1
+  logging: true
+  num_workers: 10
+  precision: 32
+  summary-only: false
+data:
+  audio_run: 95-Michelle_Aqua-2023-05-08_21.21.38
+  audio_to_db: true
+  audio_version: 47
+  color: false
+  frame_size: 150
+  frames: 20
+  gender: pria
+  n_mels: 128
+  size: Michael Kevin-full
+  transform: 4
+  type: video
+hyperparameters:
+  batch_size: 12
+  epochs: 25
+  learning_rate: 0.001
+  seed: 8
+id: 111-Abigail_SaddleBrown-16iewwi2
+model:
+  checkpoint_path: null
+  name: 111-Abigail_SaddleBrown-2023-05-20_09.07.09
+  train: true
+  version: 56
+name: null
+run: 111

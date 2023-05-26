@@ -49,6 +49,7 @@ from src.models.audio.v2.AudioAEV43 import AudioAEV43
 from src.models.audio.v2.AudioAEV44 import AudioAEV44
 from src.models.audio.v2.AudioAEV45 import AudioAEV45
 from src.models.audio.v2.AudioAEV46 import AudioAEV46
+from src.models.audio.v2.AudioAEV47 import AudioAEV47
 from src.models.audiov2.AudioV2AEV1 import AudioV2AEV1
 from src.models.audiov2.AudioV2AEV2 import AudioV2AEV2
 
@@ -294,6 +295,12 @@ def get_audio_model(version, lr=None, model_name=None, yaml_file=None):
             run_name=model_name,
             yaml_file=yaml_file
         )
+    elif version == 47 or version == "AudioAEV47":
+        return AudioAEV47(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
 
 
 def get_audio_v2_model(version, lr=None, model_name=None, yaml_file=None):
@@ -365,6 +372,14 @@ def get_visual_model(version, lr=None, model_name=None, yaml_file=None):
     from src.models.video.v2.Vid2SpeechV48 import Vid2SpeechV48
     from src.models.video.v2.Vid2SpeechV49 import Vid2SpeechV49
     from src.models.video.v2.Vid2SpeechV50 import Vid2SpeechV50
+    from src.models.video.v2.Vid2SpeechV51 import Vid2SpeechV51
+    from src.models.video.v2.Vid2SpeechV52 import Vid2SpeechV52
+    from src.models.video.v2.Vid2SpeechV53 import Vid2SpeechV53
+    from src.models.video.v2.Vid2SpeechV54 import Vid2SpeechV54
+    from src.models.video.v2.Vid2SpeechV55 import Vid2SpeechV55
+    from src.models.video.v2.Vid2SpeechV56 import Vid2SpeechV56
+    from src.models.video.v2.Vid2SpeechV57 import Vid2SpeechV57
+    from src.models.video.v2.Vid2SpeechV58 import Vid2SpeechV58
 
     if version == 1 or version == "Vid2SpeechV1":
         return Vid2SpeechV1(
@@ -662,6 +677,54 @@ def get_visual_model(version, lr=None, model_name=None, yaml_file=None):
         )
     elif version == 50 or version == "Vid2SpeechV50":
         return Vid2SpeechV50(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 51 or version == "Vid2SpeechV51":
+        return Vid2SpeechV51(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 52 or version == "Vid2SpeechV52":
+        return Vid2SpeechV52(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 53 or version == "Vid2SpeechV53":
+        return Vid2SpeechV53(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 54 or version == "Vid2SpeechV54":
+        return Vid2SpeechV54(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 55 or version == "Vid2SpeechV55":
+        return Vid2SpeechV55(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 56 or version == "Vid2SpeechV56":
+        return Vid2SpeechV56(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 57 or version == "Vid2SpeechV57":
+        return Vid2SpeechV57(
+            learning_rate=lr,
+            run_name=model_name,
+            yaml_file=yaml_file
+        )
+    elif version == 58 or version == "Vid2SpeechV58":
+        return Vid2SpeechV58(
             learning_rate=lr,
             run_name=model_name,
             yaml_file=yaml_file

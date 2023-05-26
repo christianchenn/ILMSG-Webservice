@@ -196,40 +196,46 @@ def predict_audio():
     pass
 
 
-def predict(visual_model, video_batch, audio_model, filepaths, ori_video, ori_audio, label_batch = None):
+def predict(visual_model, video_batch, audio_model, filepaths, ori_video, ori_audio, label_batch = None, generate_video=True):
     filepath_prediction, filepath_latent, filepath_ori = filepaths
     # Prediction
     latents = visual_model(video_batch)
-    target_mels = audio_model.decoder(latents)
+    with torch.inference_mode():
+        target_mels = audio_model.decoder(latents)
     target_wav = sew_audio(target_mels)
-    combine_video(
-        filepath_prediction,
-        frames=ori_video,
-        audio=target_wav,
-        fps=25,
-        sr=16000
-    )
-
-    # Latent Prediction
-    if label_batch is not None:
-        latent_mels = audio_model.decoder(label_batch)
-        latent_wav = sew_audio(latent_mels)
+    if generate_video:
         combine_video(
-            filepath_latent,
+            filepath_prediction,
             frames=ori_video,
-            audio=latent_wav,
+            audio=target_wav,
             fps=25,
             sr=16000
         )
 
+    # Latent Prediction
+    latent_mels = None
+    if label_batch is not None:
+        with torch.inference_mode():
+            latent_mels = audio_model.decoder(label_batch)
+        latent_wav = sew_audio(latent_mels)
+        if generate_video:
+            combine_video(
+                filepath_latent,
+                frames=ori_video,
+                audio=latent_wav,
+                fps=25,
+                sr=16000
+            )
+
     # Original Video
-    combine_video(
-        filepath_ori,
-        frames=ori_video,
-        audio=ori_audio,
-        fps=25,
-        sr=16000
-    )
+    if generate_video:
+        combine_video(
+            filepath_ori,
+            frames=ori_video,
+            audio=ori_audio,
+            fps=25,
+            sr=16000
+        )
 
     return (latent_mels, label_batch, ori_audio), (target_mels, latents, target_wav)
 

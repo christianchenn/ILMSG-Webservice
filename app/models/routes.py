@@ -52,7 +52,8 @@ def get(id):
 
 @bp.post("/generate")
 def generate():
-    cwd = f"{os.getcwd()}/src/resources"
+    # cwd = f"{os.getcwd()}/src/resources"
+    cwd = f"./src/resources"
     form = request.form.to_dict()
     print(form)
     print(request.files)
@@ -84,6 +85,13 @@ def generate():
     # Filenames for Target
     (filename_prediction, filepath_prediction), (filename_latent, filepath_latent), (
     filename_ori, filepath_ori) = generate_filenames(cwd)
+
+    arr_size = str(data["frame_size"]).split("x")
+    color = "" if not data["color"] else "-color"
+    if len(arr_size) == 1:
+        arr_size = [int(arr_size[0]), int(arr_size[0])]
+    else:
+        arr_size = [int(arr_size[0]), int(arr_size[1])]
 
     if visual_model == None or audio_model == None:
         raise Exception("No Model Found")
@@ -183,13 +191,6 @@ def generate():
         interim_dir = f"{cwd}/data/interim/{gender}"
         raw_video_dir = f"{interim_dir}/video/raw"
         audio_dir = f"{interim_dir}/audio"
-
-        arr_size = str(data["frame_size"]).split("x")
-        color = "" if not data["color"] else "-color"
-        if len(arr_size) == 1:
-            arr_size = [int(arr_size[0]), int(arr_size[0])]
-        else:
-            arr_size = [int(arr_size[0]), int(arr_size[1])]
 
         print(raw_video_dir)
         recording_filename = get_recording_filename(rid, raw_video_dir).split(".")[0]

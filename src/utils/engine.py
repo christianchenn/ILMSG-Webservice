@@ -8,6 +8,7 @@ import librosa
 import soundfile as sf
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 from src.utils.video import combine_video
 
@@ -90,6 +91,7 @@ def get_recording_filename(rid, directory):
 def read_frames(filepath, color=True):
     cap = cv2.VideoCapture(filepath)
     fCount = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    print(fCount)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     frames = []
@@ -261,6 +263,8 @@ def predict_with_files(video_files, label_files, transforms, visual_model, audio
         label = read_label(file)
         labels.append(label)
     labels = torch.stack(labels).cuda()
+    if len(labels.size()) == 3:
+        labels = labels.unsqueeze(1)
 
     return predict(
         visual_model=visual_model,
@@ -271,3 +275,17 @@ def predict_with_files(video_files, label_files, transforms, visual_model, audio
         label_batch=labels,
         video_batch=video_batch,
     )
+
+def generate_filenames(cwd):
+    # Filenames for Target
+    dt = datetime.now()
+    time = int(dt.strftime("%Y%m%d%H%M%S"))
+    filepath = f"{cwd}/results"
+    filename = f"{time}"
+    filename_prediction = f"{filename}_Prediction.MP4"
+    filepath_prediction = f"{filepath}/{filename_prediction}"
+    filename_latent = f"{filename}_Latent.MP4"
+    filepath_latent = f"{filepath}/{filename_latent}"
+    filename_ori = f"{filename}_Original.MP4"
+    filepath_ori = f"{filepath}/{filename_ori}"
+    return (filename_prediction,filepath_prediction), (filename_latent,filepath_latent), (filename_ori,filepath_ori)

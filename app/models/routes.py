@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 from app.models import bp
 from src.utils.engine import yaml_read_directory, yaml_search, get_recording_paths, read_frames, sew_audio, \
-    extract_recording_file, read_label, get_recording_filename, predict_with_files, predict
+    extract_recording_file, read_label, get_recording_filename, predict_with_files, predict, generate_filenames
 from flask import request, jsonify
 import os
 
@@ -16,7 +16,6 @@ from src.utils.model import get_visual_model, get_audio_model, find_ckpt
 from src.utils.preprocess import preprocess_video, split_video, split_audio
 from src.utils.transforms import get_video_transforms
 from src.utils.video import combine_video
-from datetime import datetime
 import shutil
 
 
@@ -67,6 +66,7 @@ def generate():
 
     run_model = form["run"]
     experiment = yaml_search(f"{cwd}/experiments/video", run_model)
+    print(experiment)
 
     hparams = experiment["hyperparameters"]
     config = experiment["config"]
@@ -82,16 +82,8 @@ def generate():
     audio_model = get_audio_model(data["audio_version"], learning_rate, data["audio_run"])
 
     # Filenames for Target
-    dt = datetime.now()
-    time = int(dt.strftime("%Y%m%d%H%M%S"))
-    filepath = f"{cwd}/results"
-    filename = f"{time}"
-    filename_prediction = f"{filename}_Prediction.MP4"
-    filepath_prediction = f"{filepath}/{filename_prediction}"
-    filename_latent = f"{filename}_Latent.MP4"
-    filepath_latent = f"{filepath}/{filename_latent}"
-    filename_ori = f"{filename}_Original.MP4"
-    filepath_ori = f"{filepath}/{filename_ori}"
+    (filename_prediction, filepath_prediction), (filename_latent, filepath_latent), (
+    filename_ori, filepath_ori) = generate_filenames(cwd)
 
     if visual_model == None or audio_model == None:
         raise Exception("No Model Found")
@@ -115,9 +107,70 @@ def generate():
         video_file = request.files['file']
         filename = secure_filename(video_file.filename)
         print(filename)
-        video_file.save(filename)
-        ori_video, (h, w) = read_frames(filename, True)
-        os.remove(filename)
+        temp_ori_video = f"{cwd}/temp/{filename}"
+        basename = filename.split(".")[0]
+        temp_ori_audio = f"{cwd}/temp/{basename}.WAV"
+        print(temp_ori_video)
+        print(video_file)
+        video_file.save(temp_ori_video)
+        ori_video, (h, w) = read_frames(temp_ori_video, True)
+
+        preprocessed_frames = preprocess_video(
+            rid=None,
+            transforms=transforms,
+            frames=ori_video,
+            vid_size=arr_size,
+            local=False,
+            to_gray=True
+        )
+
+        extract_audio(
+            input_file=temp_ori_video,
+            output_file=temp_ori_audio
+        )
+        ori_audio, _ = librosa.load(temp_ori_video, sr=16000)
+
+        # # Split Video
+        video_batch = split_video(
+            frames=preprocessed_frames,
+            split_frames=data["frames"],
+            stride=data["frames"],
+            total_frames=len(preprocessed_frames)
+        )
+        video_batch = video_batch.cuda()
+
+        pred_audios = []
+        pred_latents = []
+        pred_mels = []
+
+        for j in range(len(video_batch)):
+            video = video_batch[j].unsqueeze(0).cuda()
+
+            (ori_mels, ori_latent, ori_audio), (target_mels, target_latent, target_wav) = predict(
+                visual_model=visual_model,
+                filepaths=(filepath_prediction, filepath_latent, filepath_ori),
+                ori_video=ori_video,
+                video_batch=video,
+                audio_model=audio_model,
+                ori_audio=ori_audio,
+                label_batch=None,
+                generate_video=False
+            )
+            pred_audios.append(target_wav)
+            pred_latents.append(target_latent)
+            pred_mels.append(target_mels)
+
+            # audio_model, visual_model = reload_model(cwd, model_conf, data, experiment, learning_rate)
+            del video
+            torch.cuda.empty_cache()
+
+        target_wav = sew_audios(pred_audios)
+        target_wav = prep_audio(target_wav, len(ori_audio))
+        target_wav = torch.from_numpy(target_wav)
+        ori_audio = torch.from_numpy(ori_audio)
+
+        # os.remove(temp_ori_video)
+        # os.remove(temp_ori_audio)
 
     elif rid is not None:
         recordings = pd.read_json(f"{cwd}/config/recordings.json")
@@ -204,13 +257,12 @@ def generate():
                 label_batch=label_batch
             )
 
-
         return {
             "_meta": {
                 "status": 200,
                 "message": "Predictions Returned Successfully"
             },
-            "data":{
+            "data": {
                 "original": filename_ori,
                 "latent": filename_latent,
                 "prediction": filename_prediction

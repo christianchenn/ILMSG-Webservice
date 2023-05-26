@@ -94,8 +94,8 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
     if centroid is None:
         import dlib
         detector = dlib.get_frontal_face_detector()
-        predictor = dlib.shape_predictor(f"{os.getcwd()}/../../src/resources/config/shape_predictor_68_face_landmarks.dat")
-        # predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
+        # predictor = dlib.shape_predictor(f"{os.getcwd()}/../../src/resources/config/shape_predictor_68_face_landmarks.dat")
+        predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
         print(detector, predictor)
         # Calculate Centroid
         centroid = lip_to_centroid(
@@ -109,7 +109,6 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
             "cy": centroid[1]
         }
 
-    print(centroid)
     cropped_frames = crop_lip(
         frames=gray_frames,
         centroid=[float(centroid["cx"]), float(centroid["cy"])],
@@ -137,3 +136,40 @@ def convert_to_wav(input_file, output_file, sample_rate=48000, filename="file", 
         call(command)
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+
+def cvt_25fps(input_file, output_file):
+    # Load the video clip
+    clip = VideoFileClip(input_file)
+    # Set the target frame rate to 25 FPS
+    target_fps = 25
+    # Convert the clip to 25 FPS
+    clip_25fps = clip.set_fps(target_fps)
+    # Write the converted clip to a new file
+    clip_25fps.write_videofile(output_file, codec="libx264")
+    # Close the clip
+    clip.close()
+
+
+def extract_audio(input_file, output_file):
+    # Load the video clip
+    clip = VideoFileClip(input_file)
+    # Extract the audio from the video
+    audio = clip.audio
+    # Save the audio as a WAV file
+    audio.write_audiofile(output_file, codec="pcm_s16le")
+    # Close the clip
+    clip.close()
+
+def cut_ori_audio(ori_audio, total_frames, sr=16000, fps=25):
+    frame = sr//fps
+    print(int(total_frames*frame))
+    return ori_audio[:int(total_frames*frame)]
+
+def prep_audio(modified_audio, target_length):
+    # Adjust the length of the resampled modified audio to match the target length
+    if len(modified_audio) > target_length:
+        modified_audio = modified_audio[:target_length]
+    elif len(modified_audio) < target_length:
+        modified_audio = librosa.util.fix_length(modified_audio, size=target_length)
+
+    return modified_audio

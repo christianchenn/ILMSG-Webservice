@@ -7,7 +7,7 @@ import librosa
 import numpy as np
 import pandas as pd
 import torch
-
+from moviepy.editor import VideoFileClip
 from src.utils.video import read_frames, cut_frames, crop_lip, lip_to_centroid
 
 
@@ -164,6 +164,25 @@ def cut_ori_audio(ori_audio, total_frames, sr=16000, fps=25):
     frame = sr//fps
     print(int(total_frames*frame))
     return ori_audio[:int(total_frames*frame)]
+
+def prep_audio(modified_audio, target_length):
+    # Adjust the length of the resampled modified audio to match the target length
+    if len(modified_audio) > target_length:
+        modified_audio = modified_audio[:target_length]
+    elif len(modified_audio) < target_length:
+        modified_audio = librosa.util.fix_length(modified_audio, size=target_length)
+
+    return modified_audio
+
+def sew_audios(wavs):
+    audio_data = []
+
+    for wav in wavs:
+        audio_data.append(wav)
+
+    # Concatenate the audio data
+    concatenated_data = np.concatenate(audio_data)
+    return concatenated_data
 
 def prep_audio(modified_audio, target_length):
     # Adjust the length of the resampled modified audio to match the target length

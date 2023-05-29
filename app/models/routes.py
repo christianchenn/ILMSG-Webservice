@@ -8,12 +8,12 @@ from werkzeug.utils import secure_filename
 
 from app.models import bp
 from src.utils.engine import yaml_read_directory, yaml_search, get_recording_paths, read_frames, sew_audio, \
-    extract_recording_file, read_label, get_recording_filename, predict_with_files, predict, generate_filenames
+    extract_recording_file, read_label, get_recording_filename, predict_with_files, predict, generate_filenames, generate_videos
 from flask import request, jsonify
 import os
 
 from src.utils.model import get_visual_model, get_audio_model, find_ckpt
-from src.utils.preprocess import preprocess_video, split_video, split_audio
+from src.utils.preprocess import preprocess_video, split_video, split_audio, extract_audio, sew_audios, prep_audio
 from src.utils.transforms import get_video_transforms
 from src.utils.video import combine_video
 import shutil
@@ -177,6 +177,12 @@ def generate():
         target_wav = torch.from_numpy(target_wav)
         ori_audio = torch.from_numpy(ori_audio)
 
+        generate_videos(
+            filepaths=(filepath_prediction, filepath_latent, filepath_ori),
+            ori_video = ori_video, 
+            target_wav = target_wav, 
+            ori_audio = ori_audio, 
+        )
         # os.remove(temp_ori_video)
         # os.remove(temp_ori_audio)
 
@@ -258,14 +264,14 @@ def generate():
                 label_batch=label_batch
             )
 
-        return {
-            "_meta": {
-                "status": 200,
-                "message": "Predictions Returned Successfully"
-            },
-            "data": {
-                "original": filename_ori,
-                "latent": filename_latent,
-                "prediction": filename_prediction
-            }
+    return {
+        "_meta": {
+            "status": 200,
+            "message": "Predictions Returned Successfully"
+        },
+        "data": {
+            "original": filename_ori,
+            "latent": filename_latent,
+            "prediction": filename_prediction
         }
+    }

@@ -197,6 +197,32 @@ def extract_recording_file(input_string):
 def predict_audio():
     pass
 
+def generate_videos(filepaths, ori_video, target_wav, ori_audio = None, latent_wav = None):
+    (filepath_prediction, filepath_latent, filepath_ori) = filepaths
+    combine_video(
+            filepath_prediction,
+            frames=ori_video,
+            audio=target_wav,
+            fps=25,
+            sr=16000
+        )
+    if latent_wav is not None:
+        combine_video(
+                filepath_latent,
+                frames=ori_video,
+                audio=latent_wav,
+                fps=25,
+                sr=16000
+            )
+    if ori_audio is not None:
+        combine_video(
+                filepath_ori,
+                frames=ori_video,
+                audio=ori_audio,
+                fps=25,
+                sr=16000
+            )
+
 
 def predict(visual_model, video_batch, audio_model, filepaths, ori_video, ori_audio, label_batch = None, generate_video=True):
     filepath_prediction, filepath_latent, filepath_ori = filepaths

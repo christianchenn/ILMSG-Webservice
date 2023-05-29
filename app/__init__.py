@@ -13,7 +13,8 @@ def create_app(config_class=Config):
     app.config['CORS_HEADERS'] = 'Content-Type'
 
     # cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:5173"}})
-    cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3002"}})
+    # cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3002"}})
+    cors = CORS(app, resources={r"/*": {"origins": "http://mlpc5-istts:3002"}})
     # cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Initialize Flask extensions here

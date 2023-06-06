@@ -5,6 +5,7 @@ import pandas as pd
 import scipy
 import torch
 from werkzeug.utils import secure_filename
+from datetime import datetime
 
 from app.models import bp
 from src.utils.engine import yaml_read_directory, yaml_search, get_recording_paths, read_frames, sew_audio, \
@@ -17,6 +18,8 @@ from src.utils.preprocess import preprocess_video, split_video, split_audio, ext
 from src.utils.transforms import get_video_transforms
 from src.utils.video import combine_video
 import shutil
+
+from src.visualization.audio import visualize_mels, visualize_latent
 
 
 @bp.get('/')
@@ -109,6 +112,7 @@ def generate():
         visual_model = load_model(visual_model, cwd, "video", data["frames"], model_conf["name"])
 
     # 3 Types of Input
+    target_latents = None
     if url is not None:
         pass
     elif 'file' in request.files:
@@ -217,7 +221,7 @@ def generate():
             video_files = get_recording_paths(rid, video_dir)
 
         if len(video_files) > 0:
-            predict_with_files(
+            (latent_mels, label_batch, ori_audio), (target_mels, target_latents, target_wav) = predict_with_files(
                 video_files=video_files,
                 filepaths=(filepath_prediction, filepath_latent, filepath_ori),
                 transforms=transforms,
@@ -254,7 +258,7 @@ def generate():
             label_batch = label_batch.unsqueeze(1)
             label_batch = audio_model.encoder(label_batch)
 
-            predict(
+            (latent_mels, label_batch, ori_audio), (target_mels, target_latents, target_wav) = predict(
                 visual_model=visual_model,
                 filepaths=(filepath_prediction, filepath_latent, filepath_ori),
                 ori_video=ori_video,
@@ -263,6 +267,91 @@ def generate():
                 ori_audio=ori_audio,
                 label_batch=label_batch
             )
+            
+            
+        has_label = True if label_batch is not None else False
+        concat_img_target_mel = []
+        concat_img_target_latent = []
+        concat_img_input_mel = []
+        concat_img_input_latent = []
+
+        for i in range(len(latent_mels)):
+            target_mel = target_mels[i]
+            target_latent = target_latents[i]
+            input_latent = label_batch[i] if label_batch is not None else None
+            input_mel = latent_mels[i] if label_batch is not None else None
+
+            img_target_mel = visualize_mels(
+                mels=target_mel.cpu().squeeze().numpy(),
+                save=True,
+                truth=True,
+                from_db=True
+            )
+            
+            img_target_latent = visualize_latent(
+                target_latent,
+                gt=True,
+                save=True,
+                vmin= input_latent.min() if has_label else target_latent.min(),
+                vmax= input_latent.max() if has_label else target_latent.max(),
+            )
+            
+            concat_img_target_mel.append(img_target_mel)
+            concat_img_target_latent.append(img_target_latent)
+            
+            if has_label:
+                img_input_mel = visualize_mels(
+                    mels=input_mel.cpu().squeeze().numpy(),
+                    save=True,
+                    truth=True,
+                    from_db=True
+                )
+                img_input_latent = visualize_latent(
+                    input_latent,
+                    gt=True,
+                    save=True,
+                    vmin= input_latent.min(),
+                    vmax= input_latent.max(),
+                )
+                concat_img_input_mel.append(img_input_mel)
+                concat_img_input_latent.append(img_input_latent)
+        
+        def save_image(images, path):
+            from PIL import Image
+            print(np.array(images).shape)
+            image = Image.fromarray(images)
+            image.save(path)
+        
+        def generate_image_filename(desc):
+            dt = datetime.now()
+            time = int(dt.strftime("%Y%m%d%H%M%S"))
+            filepath = f"{cwd}/results"
+            filename = f"{time}"
+            filename = f"{filename}_{desc}.png"
+            filepath = f"{filepath}/{filename}"
+            return filepath, filename
+        
+        
+        (target_mels_path, target_mels_filename) = generate_image_filename("Target Mels")
+        (target_latent_path, target_latent_filename) = generate_image_filename("Target Latent")
+        
+        concat_img_target_mel = np.concatenate(concat_img_target_mel, axis=1)
+        concat_img_target_latent = np.concatenate(concat_img_target_latent, axis=1)
+        save_image(concat_img_target_mel, target_mels_path)
+        save_image(concat_img_target_latent, target_latent_path)
+        
+        input_mels_path = None
+        input_latent_path = None
+        input_mels_filename = None
+        input_latent_filename = None
+        if has_label:
+            (input_mels_path, input_mels_filename) = generate_image_filename("Input Mels")
+            (input_latent_path, input_latent_filename) = generate_image_filename("Input Latent")
+            
+            concat_img_input_mel = np.concatenate(concat_img_input_mel, axis=1)
+            concat_img_input_latent = np.concatenate(concat_img_input_latent, axis=1)
+            save_image(concat_img_input_mel, input_mels_path)
+            save_image(concat_img_input_latent, input_latent_path)
 
     return {
         "_meta": {
@@ -272,6 +361,10 @@ def generate():
         "data": {
             "original": filename_ori,
             "latent": filename_latent,
-            "prediction": filename_prediction
+            "prediction": filename_prediction,
+            "target_mel": target_mels_filename,
+            "target_latent": target_latent_filename,
+            "input_mel": input_mels_filename,
+            "input_target": input_latent_filename,
         }
     }

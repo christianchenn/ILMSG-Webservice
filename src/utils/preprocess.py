@@ -94,8 +94,8 @@ def preprocess_video(frames, rid, vid_size, transforms, local=True, to_gray=True
     if centroid is None:
         import dlib
         detector = dlib.get_frontal_face_detector()
-        # predictor = dlib.shape_predictor(f"{os.getcwd()}/../../src/resources/config/shape_predictor_68_face_landmarks.dat")
-        predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
+        predictor = dlib.shape_predictor(f"{os.getcwd()}/../../src/resources/config/shape_predictor_68_face_landmarks.dat")
+        # predictor = dlib.shape_predictor(f"{os.getcwd()}/src/resources/config/shape_predictor_68_face_landmarks.dat")
         print(detector, predictor)
         # Calculate Centroid
         centroid = lip_to_centroid(

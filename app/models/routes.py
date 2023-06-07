@@ -113,6 +113,9 @@ def generate():
 
     # 3 Types of Input
     target_latents = None
+    target_mels = None
+    label_batch = None
+    
     if url is not None:
         pass
     elif 'file' in request.files:
@@ -154,7 +157,6 @@ def generate():
         pred_audios = []
         pred_latents = []
         pred_mels = []
-
         for j in range(len(video_batch)):
             video = video_batch[j].unsqueeze(0).cuda()
 
@@ -187,6 +189,9 @@ def generate():
             target_wav = target_wav, 
             ori_audio = ori_audio, 
         )
+        
+        target_mels = pred_mels
+        target_latents = pred_latents
         # os.remove(temp_ori_video)
         # os.remove(temp_ori_audio)
 
@@ -268,90 +273,99 @@ def generate():
                 label_batch=label_batch
             )
             
-            
-        has_label = True if label_batch is not None else False
-        concat_img_target_mel = []
-        concat_img_target_latent = []
-        concat_img_input_mel = []
-        concat_img_input_latent = []
+    
+    has_label = True if label_batch is not None else False
+    concat_img_target_mel = []
+    concat_img_target_latent = []
+    concat_img_input_mel = []
+    concat_img_input_latent = []
 
-        for i in range(len(latent_mels)):
-            target_mel = target_mels[i]
-            target_latent = target_latents[i]
+    for i in range(len(target_mels)):
+        target_mel = target_mels[i]
+        target_latent = target_latents[i]
+
+        img_target_mel = visualize_mels(
+            mels=target_mel.cpu().squeeze().numpy(),
+            save=True,
+            truth=False,
+            from_db=True
+        )
+        
+        concat_img_target_mel.append(img_target_mel)
+        
+        
+        if has_label:
             input_latent = label_batch[i] if label_batch is not None else None
             input_mel = latent_mels[i] if label_batch is not None else None
-
-            img_target_mel = visualize_mels(
-                mels=target_mel.cpu().squeeze().numpy(),
+            img_input_mel = visualize_mels(
+                mels=input_mel.cpu().squeeze().numpy(),
                 save=True,
                 truth=True,
                 from_db=True
             )
-            
-            img_target_latent = visualize_latent(
-                target_latent,
+            img_input_latent = visualize_latent(
+                input_latent,
                 gt=True,
                 save=True,
-                vmin= input_latent.min() if has_label else target_latent.min(),
-                vmax= input_latent.max() if has_label else target_latent.max(),
+                vmin= input_latent.min(),
+                vmax= input_latent.max(),
             )
-            
-            concat_img_target_mel.append(img_target_mel)
+            img_target_latent = visualize_latent(
+                target_latent,
+                gt=False,
+                save=True,
+                vmin= input_latent.min(),
+                vmax= input_latent.max(),
+            )
             concat_img_target_latent.append(img_target_latent)
-            
-            if has_label:
-                img_input_mel = visualize_mels(
-                    mels=input_mel.cpu().squeeze().numpy(),
-                    save=True,
-                    truth=True,
-                    from_db=True
-                )
-                img_input_latent = visualize_latent(
-                    input_latent,
-                    gt=True,
-                    save=True,
-                    vmin= input_latent.min(),
-                    vmax= input_latent.max(),
-                )
-                concat_img_input_mel.append(img_input_mel)
-                concat_img_input_latent.append(img_input_latent)
+            concat_img_input_mel.append(img_input_mel)
+            concat_img_input_latent.append(img_input_latent)
+        else:
+            img_target_latent = visualize_latent(
+                target_latent,
+                gt=False,
+                save=True,
+                vmin= target_latent.min(),
+                vmax= target_latent.max(),
+            )
+            concat_img_target_latent.append(img_target_latent)
         
-        def save_image(images, path):
-            from PIL import Image
-            print(np.array(images).shape)
-            image = Image.fromarray(images)
-            image.save(path)
-        
-        def generate_image_filename(desc):
-            dt = datetime.now()
-            time = int(dt.strftime("%Y%m%d%H%M%S"))
-            filepath = f"{cwd}/results"
-            filename = f"{time}"
-            filename = f"{filename}_{desc}.png"
-            filepath = f"{filepath}/{filename}"
-            return filepath, filename
+    def save_image(images, path):
+        from PIL import Image
+        print(np.array(images).shape)
+        image = Image.fromarray(images)
+        image.save(path)
+    
+    def generate_image_filename(desc):
+        dt = datetime.now()
+        time = int(dt.strftime("%Y%m%d%H%M%S"))
+        filepath = f"{cwd}/results"
+        filename = f"{time}"
+        filename = f"{filename}_{desc}.png"
+        filepath = f"{filepath}/{filename}"
+        return filepath, filename
         
         
-        (target_mels_path, target_mels_filename) = generate_image_filename("Target Mels")
-        (target_latent_path, target_latent_filename) = generate_image_filename("Target Latent")
+    (target_mels_path, target_mels_filename) = generate_image_filename("Target Mels")
+    (target_latent_path, target_latent_filename) = generate_image_filename("Target Latent")
+    
+    concat_img_target_mel = np.concatenate(concat_img_target_mel, axis=1)
+    concat_img_target_latent = np.concatenate(concat_img_target_latent, axis=1)
+    save_image(concat_img_target_mel, target_mels_path)
+    save_image(concat_img_target_latent, target_latent_path)
+    
+    input_mels_path = None
+    input_latent_path = None
+    input_mels_filename = None
+    input_latent_filename = None
+    if has_label:
+        (input_mels_path, input_mels_filename) = generate_image_filename("Input Mels")
+        (input_latent_path, input_latent_filename) = generate_image_filename("Input Latent")
         
-        concat_img_target_mel = np.concatenate(concat_img_target_mel, axis=1)
-        concat_img_target_latent = np.concatenate(concat_img_target_latent, axis=1)
-        save_image(concat_img_target_mel, target_mels_path)
-        save_image(concat_img_target_latent, target_latent_path)
-        
-        input_mels_path = None
-        input_latent_path = None
-        input_mels_filename = None
-        input_latent_filename = None
-        if has_label:
-            (input_mels_path, input_mels_filename) = generate_image_filename("Input Mels")
-            (input_latent_path, input_latent_filename) = generate_image_filename("Input Latent")
-            
-            concat_img_input_mel = np.concatenate(concat_img_input_mel, axis=1)
-            concat_img_input_latent = np.concatenate(concat_img_input_latent, axis=1)
-            save_image(concat_img_input_mel, input_mels_path)
-            save_image(concat_img_input_latent, input_latent_path)
+        concat_img_input_mel = np.concatenate(concat_img_input_mel, axis=1)
+        concat_img_input_latent = np.concatenate(concat_img_input_latent, axis=1)
+        save_image(concat_img_input_mel, input_mels_path)
+        save_image(concat_img_input_latent, input_latent_path)
 
     return {
         "_meta": {
@@ -365,6 +379,6 @@ def generate():
             "target_mel": target_mels_filename,
             "target_latent": target_latent_filename,
             "input_mel": input_mels_filename,
-            "input_target": input_latent_filename,
+            "input_latent": input_latent_filename,
         }
     }
